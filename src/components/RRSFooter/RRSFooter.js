@@ -1,6 +1,6 @@
-import React from "react";
-import { Container, Grid, Typography, Link, Box } from "@material-ui/core";
-import { makeStyles } from "@material-ui/styles";
+import React from "react"
+import { Container, Grid, Typography, Link, Box } from "@material-ui/core"
+import { makeStyles } from "@material-ui/styles"
 
 const useStyles = makeStyles(theme => ({
   footer: {
@@ -13,7 +13,7 @@ const useStyles = makeStyles(theme => ({
       paddingBottom: theme.spacing(6)
     }
   }
-}));
+}))
 
 const footers = [
   {
@@ -43,10 +43,10 @@ const footers = [
     title: "Legal",
     description: ["Privacy policy", "Terms of use"]
   }
-];
+]
 
-export default function RRSFooter(props) {
-  const classes = useStyles();
+export default function RRSFooter() {
+  const classes = useStyles()
 
   return (
     <Container maxWidth="md" component="footer" className={classes.footer}>
@@ -72,7 +72,7 @@ export default function RRSFooter(props) {
         <Copyright />
       </Box>
     </Container>
-  );
+  )
 }
 
 function Copyright() {
@@ -85,5 +85,5 @@ function Copyright() {
       {new Date().getFullYear()}
       {"."}
     </Typography>
-  );
+  )
 }

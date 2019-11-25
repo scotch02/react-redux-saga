@@ -1,9 +1,7 @@
-import AppBar from "@material-ui/core/AppBar";
-import React from "react";
-import { Toolbar, Typography, Link, Button } from "@material-ui/core";
-import { makeStyles } from "@material-ui/styles";
-
-
+import AppBar from "@material-ui/core/AppBar"
+import React from "react"
+import { Toolbar, Typography, Link, Button } from "@material-ui/core"
+import { makeStyles } from "@material-ui/styles"
 
 const useStyles = makeStyles(theme => ({
   appBar: {
@@ -17,14 +15,19 @@ const useStyles = makeStyles(theme => ({
   },
   link: {
     margin: theme.spacing(1, 1.5)
-  }  
-}));
+  }
+}))
 
-export default function RRSAppBar(props) {
-  const classes = useStyles();
+export default function RRSAppBar() {
+  const classes = useStyles()
 
   return (
-    <AppBar position="static" color="default" elevation={0} className={classes.appBar}>
+    <AppBar
+      position="static"
+      color="default"
+      elevation={0}
+      className={classes.appBar}
+    >
       <Toolbar className={classes.toolbar}>
         <Typography
           variant="h6"
@@ -70,5 +73,5 @@ export default function RRSAppBar(props) {
         </Button>
       </Toolbar>
     </AppBar>
-  );
+  )
 }

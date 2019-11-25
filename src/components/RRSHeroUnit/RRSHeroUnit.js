@@ -1,15 +1,15 @@
-import React from "react";
-import { Container, Typography } from "@material-ui/core";
-import { makeStyles } from "@material-ui/styles";
+import React from "react"
+import { Container, Typography } from "@material-ui/core"
+import { makeStyles } from "@material-ui/styles"
 
 const useStyles = makeStyles(theme => ({
   heroContent: {
     padding: theme.spacing(8, 0, 6)
   }
-}));
+}))
 
-export default function HeroUnit(props) {
-  const classes = useStyles();
+export default function HeroUnit() {
+  const classes = useStyles()
 
   return (
     <Container maxWidth="sm" component="main" className={classes.heroContent}>
@@ -33,5 +33,5 @@ export default function HeroUnit(props) {
         with little customization.
       </Typography>
     </Container>
-  );
+  )
 }

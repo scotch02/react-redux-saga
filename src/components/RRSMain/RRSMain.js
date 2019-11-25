@@ -1,4 +1,4 @@
-import React from "react";
+import React from "react"
 import {
   Container,
   Typography,
@@ -8,9 +8,9 @@ import {
   Button,
   CardContent,
   CardActions
-} from "@material-ui/core";
-import StarIcon from '@material-ui/icons/StarBorder';
-import { makeStyles } from "@material-ui/styles";
+} from "@material-ui/core"
+import StarIcon from "@material-ui/icons/StarBorder"
+import { makeStyles } from "@material-ui/styles"
 
 const useStyles = makeStyles(theme => ({
   cardHeader: {
@@ -22,7 +22,7 @@ const useStyles = makeStyles(theme => ({
     alignItems: "baseline",
     marginBottom: theme.spacing(2)
   }
-}));
+}))
 
 const tiers = [
   {
@@ -62,10 +62,10 @@ const tiers = [
     buttonText: "Contact us",
     buttonVariant: "outlined"
   }
-];
+]
 
-export default function RRSMain(props) {
-  const classes = useStyles();
+export default function RRSMain() {
+  const classes = useStyles()
 
   return (
     <Container maxWidth="md" component="main">
@@ -120,5 +120,5 @@ export default function RRSMain(props) {
         ))}
       </Grid>
     </Container>
-  );
+  )
 }

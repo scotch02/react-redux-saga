@@ -1,5 +1,5 @@
 export default class Privat {
-/*
+  /*
 curl --header "Content-Type: application/json;charset=utf-8"  --request GET 'https://api.privatbank.ua/p24api/pubinfo?json&exchange&coursid=5'
 [
     {
@@ -31,24 +31,24 @@ curl --header "Content-Type: application/json;charset=utf-8"  --request GET 'htt
 
   static async getExchange() {
     const requestUrl =
-      "https://api.privatbank.ua/p24api/pubinfo?json&exchange&coursid=5";
+      "https://api.privatbank.ua/p24api/pubinfo?json&exchange&coursid=5"
     const response = await fetch(requestUrl, {
       method: "GET",
       headers: {
         "Content-Type": "application/json;charset=utf-8"
       }
-    });
-    
-    if(!response.ok) {
-        const { status, statusText } = response;
-        throw new Error({
-            requestUrl,
-            method: 'GET', 
-            status,
-            statusText
-        });
+    })
+
+    if (!response.ok) {
+      const { status, statusText } = response
+      throw new Error({
+        requestUrl,
+        method: "GET",
+        status,
+        statusText
+      })
     }
 
-    return await response.json();
+    return response.json()
   }
 }
