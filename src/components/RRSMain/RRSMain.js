@@ -1,14 +1,9 @@
-import React from "react"
-import {
-  Container,
-  Grid,
-  Button
-} from "@material-ui/core"
+import React from "react";
+import { Container, Grid } from "@material-ui/core";
 
-import RRSCurrency from "../RRSCurrency/RRSCurrency"
-import Form from "../PaymentForm/PaymentForm"
-import { makeStyles } from "@material-ui/styles"
-
+import RRSCurrency from "../RRSCurrency/RRSCurrency";
+import Form from "../PaymentForm/PaymentForm";
+import { makeStyles } from "@material-ui/styles";
 
 const currencies = [
   {
@@ -27,52 +22,38 @@ const currencies = [
   },
   {
     title: "XRP",
-    usd: 0.2500,
+    usd: 0.25,
     uah: 7.0231,
     rub: 17.228,
     selected: false
   }
-]
+];
 
 const useStyles = makeStyles(theme => ({
-  buttons: {
-    display: 'flex',
-    justifyContent: 'flex-end',
+  currencies: {
+    padding: theme.spacing(8, 0, 0)
   },
-  button: {
-    marginTop: theme.spacing(3),
-    marginLeft: theme.spacing(1),
+  form: {
+    padding: theme.spacing(8, 4, 6)
   }
 }));
 
 export default function RRSMain() {
-  const classes = useStyles()
+  const classes = useStyles();
 
   return (
     <>
-      <Container maxWidth="md" component="main">
+      <Container maxWidth="md" component="main" className={classes.currencies}>
         <Grid container spacing={5} alignItems="flex-end">
           {currencies.map(currency => (
             <RRSCurrency {...currency} />
           ))}
         </Grid>
       </Container>
-      
-      <Form />
 
-      <div className={classes.buttons}>
-        <Button className={classes.button}>
-          Back
-        </Button>
-        <Button
-          variant="contained"
-          color="primary"
-          className={classes.button}
-        >
-          Place order
-        </Button>
-      </div>
-
+      <Container maxWidth="md" component="main" className={classes.form}>
+        <Form />
+      </Container>
     </>
-  )
+  );
 }

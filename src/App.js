@@ -40,7 +40,6 @@ function App() {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <RRSAppBar />
-        <RRSHeroUnit />
         <RRSMain />
         <RRSFooter />
       </ThemeProvider>
