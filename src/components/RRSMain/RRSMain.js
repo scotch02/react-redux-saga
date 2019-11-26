@@ -1,124 +1,78 @@
 import React from "react"
 import {
   Container,
-  Typography,
   Grid,
-  Card,
-  CardHeader,
-  Button,
-  CardContent,
-  CardActions
+  Button
 } from "@material-ui/core"
-import StarIcon from "@material-ui/icons/StarBorder"
+
+import RRSCurrency from "../RRSCurrency/RRSCurrency"
+import Form from "../PaymentForm/PaymentForm"
 import { makeStyles } from "@material-ui/styles"
 
-const useStyles = makeStyles(theme => ({
-  cardHeader: {
-    backgroundColor: theme.palette.grey[200]
-  },
-  cardPricing: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "baseline",
-    marginBottom: theme.spacing(2)
-  }
-}))
 
-const tiers = [
+const currencies = [
   {
-    title: "Free",
-    price: "0",
-    description: [
-      "10 users included",
-      "2 GB of storage",
-      "Help center access",
-      "Email support"
-    ],
-    buttonText: "Sign up for free",
-    buttonVariant: "outlined"
+    title: "BTC",
+    usd: 6800,
+    uah: 150000,
+    rub: 340000,
+    selected: false
   },
   {
-    title: "Pro",
-    subheader: "Most popular",
-    price: "15",
-    description: [
-      "20 users included",
-      "10 GB of storage",
-      "Help center access",
-      "Priority email support"
-    ],
-    buttonText: "Get started",
-    buttonVariant: "contained"
+    title: "ETH",
+    usd: 250,
+    uah: 7400,
+    rub: 160000,
+    selected: true
   },
   {
-    title: "Enterprise",
-    price: "30",
-    description: [
-      "50 users included",
-      "30 GB of storage",
-      "Help center access",
-      "Phone & email support"
-    ],
-    buttonText: "Contact us",
-    buttonVariant: "outlined"
+    title: "XRP",
+    usd: 0.2500,
+    uah: 7.0231,
+    rub: 17.228,
+    selected: false
   }
 ]
+
+const useStyles = makeStyles(theme => ({
+  buttons: {
+    display: 'flex',
+    justifyContent: 'flex-end',
+  },
+  button: {
+    marginTop: theme.spacing(3),
+    marginLeft: theme.spacing(1),
+  }
+}));
 
 export default function RRSMain() {
   const classes = useStyles()
 
   return (
-    <Container maxWidth="md" component="main">
-      <Grid container spacing={5} alignItems="flex-end">
-        {tiers.map(tier => (
-          // Enterprise card is full width at sm breakpoint
-          <Grid
-            item
-            key={tier.title}
-            xs={12}
-            sm={tier.title === "Enterprise" ? 12 : 6}
-            md={4}
-          >
-            <Card>
-              <CardHeader
-                title={tier.title}
-                subheader={tier.subheader}
-                titleTypographyProps={{ align: "center" }}
-                subheaderTypographyProps={{ align: "center" }}
-                action={tier.title === "Pro" ? <StarIcon /> : null}
-                className={classes.cardHeader}
-              />
-              <CardContent>
-                <div className={classes.cardPricing}>
-                  <Typography component="h2" variant="h3" color="textPrimary">
-                    ${tier.price}
-                  </Typography>
-                  <Typography variant="h6" color="textSecondary">
-                    /mo
-                  </Typography>
-                </div>
-                <ul>
-                  {tier.description.map(line => (
-                    <Typography
-                      component="li"
-                      variant="subtitle1"
-                      align="center"
-                      key={line}
-                    >
-                      {line}
-                    </Typography>
-                  ))}
-                </ul>
-              </CardContent>
-              <CardActions>
-                <Button fullWidth variant={tier.buttonVariant} color="primary">
-                  {tier.buttonText}
-                </Button>
-              </CardActions>
-            </Card>
-          </Grid>
-        ))}
-      </Grid>
-    </Container>
+    <>
+      <Container maxWidth="md" component="main">
+        <Grid container spacing={5} alignItems="flex-end">
+          {currencies.map(currency => (
+            <RRSCurrency {...currency} />
+          ))}
+        </Grid>
+      </Container>
+      
+      <Form />
+
+      <div className={classes.buttons}>
+        <Button className={classes.button}>
+          Back
+        </Button>
+        <Button
+          variant="contained"
+          color="primary"
+          className={classes.button}
+        >
+          Place order
+        </Button>
+      </div>
+
+    </>
   )
 }
