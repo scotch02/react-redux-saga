@@ -18,7 +18,7 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-export default function RRSAppBar() {
+export default function Header() {
   const classes = useStyles()
 
   return (
@@ -35,7 +35,7 @@ export default function RRSAppBar() {
           noWrap
           className={classes.toolbarTitle}
         >
-          Company name
+          React November 2019
         </Typography>
         <nav>
           <Link
@@ -44,7 +44,7 @@ export default function RRSAppBar() {
             href="#"
             className={classes.link}
           >
-            Features
+            Exchange 
           </Link>
           <Link
             variant="button"
@@ -52,7 +52,7 @@ export default function RRSAppBar() {
             href="#"
             className={classes.link}
           >
-            Enterprise
+            React Redux Router
           </Link>
           <Link
             variant="button"
@@ -60,7 +60,7 @@ export default function RRSAppBar() {
             href="#"
             className={classes.link}
           >
-            Support
+            React Redux UI
           </Link>
         </nav>
         <Button

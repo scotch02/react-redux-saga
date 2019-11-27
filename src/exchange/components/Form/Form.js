@@ -20,7 +20,7 @@ const useStyles = makeStyles(theme => ({
 
 }));
 
-export default function PaymentForm() {
+export default function Form() {
   const classes = useStyles();
 
   return (

@@ -1,8 +1,8 @@
 import React from "react";
 import { Container, Grid } from "@material-ui/core";
 
-import RRSCurrency from "../RRSCurrency/RRSCurrency";
-import Form from "../PaymentForm/PaymentForm";
+import RRSCurrency from "../Course/Course";
+import Form from "../Form/Form";
 import { makeStyles } from "@material-ui/styles";
 
 const currencies = [
@@ -38,7 +38,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function RRSMain() {
+export default function Main() {
   const classes = useStyles();
 
   return (

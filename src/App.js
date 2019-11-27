@@ -4,10 +4,9 @@ import CssBaseline from "@material-ui/core/CssBaseline"
 import { ThemeProvider } from "@material-ui/styles"
 import { createMuiTheme } from "@material-ui/core"
 import { purple, green } from "@material-ui/core/colors"
-import RRSAppBar from "./components/RRSAppBar/RRSAppBar"
-import RRSHeroUnit from "./components/RRSHeroUnit/RRSHeroUnit"
-import RRSMain from "./components/RRSMain/RRSMain"
-import RRSFooter from "./components/RRSFooter/RRSFooter"
+import Header from "./common/Header/Header"
+import RRSMain from "./exchange/components/Main/Main"
+import Footer from "./common/Footer/Footer"
 
 const theme = createMuiTheme({
   palette: {
@@ -39,9 +38,9 @@ function App() {
     <>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <RRSAppBar />
+        <Header />
         <RRSMain />
-        <RRSFooter />
+        <Footer />
       </ThemeProvider>
     </>
   )

@@ -45,7 +45,7 @@ const footers = [
   }
 ]
 
-export default function RRSFooter() {
+export default function Footer() {
   const classes = useStyles()
 
   return (
