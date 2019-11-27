@@ -37,6 +37,9 @@ export default function PaymentForm() {
             label="volume"
             helperText="How many cryptocurrencies would you like to buy"
             fullWidth
+            error
+            helperText="Incorrect entry."
+            type="number"
           />
         </Grid>
 
@@ -57,14 +60,14 @@ export default function PaymentForm() {
           </Button>
         </div>
         <Typography
-        component="h1"
-        variant="h2"
-        align="center"
-        color="textPrimary"
-        gutterBottom
-        className = {classes.result}
-      >
-        5 ETH will be 37000 in UAH 
+          component="h1"
+          variant="h2"
+          align="center"
+          color="textPrimary"
+          gutterBottom
+          className={classes.result}
+        >
+          5 ETH will be 37000 in UAH
       </Typography>
 
       </Grid>
