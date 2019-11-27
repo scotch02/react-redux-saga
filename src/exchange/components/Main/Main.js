@@ -1,7 +1,7 @@
 import React from "react";
 import { Container, Grid } from "@material-ui/core";
 
-import RRSCurrency from "../Course/Course";
+import Course from "../Course/Course";
 import Form from "../Form/Form";
 import { makeStyles } from "@material-ui/styles";
 
@@ -46,7 +46,7 @@ export default function Main() {
       <Container maxWidth="md" component="main" className={classes.currencies}>
         <Grid container spacing={5} alignItems="flex-end">
           {currencies.map(currency => (
-            <RRSCurrency {...currency} />
+            <Course {...currency} />
           ))}
         </Grid>
       </Container>

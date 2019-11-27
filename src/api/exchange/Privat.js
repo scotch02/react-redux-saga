@@ -31,24 +31,90 @@ curl --header "Content-Type: application/json;charset=utf-8"  --request GET 'htt
 
   static async getExchange() {
     const requestUrl =
-      "https://api.privatbank.ua/p24api/pubinfo?json&exchange&coursid=5"
+      "https://api.privatbank.ua/p24api/pubinfo?json&exchange&coursid=5";
     const response = await fetch(requestUrl, {
       method: "GET",
       headers: {
         "Content-Type": "application/json;charset=utf-8"
       }
-    })
+    });
 
     if (!response.ok) {
-      const { status, statusText } = response
+      const { status, statusText } = response;
       throw new Error({
         requestUrl,
         method: "GET",
         status,
         statusText
-      })
+      });
     }
 
-    return response.json()
+    return response.json();
+  }
+
+  static getUsefulData(privatDataArr) {
+    const btcItem = privatDataArr.find(({ ccy }) => ccy === "BTC");
+    const usdItem = privatDataArr.find(({ ccy }) => ccy === "USD");
+    const rurItem = privatDataArr.find(({ ccy }) => ccy === "RUR");
+
+    const pairs = [
+      {
+        currency: "BTC",
+        baseCurrency: "USD",
+        sale: btcItem.sale
+      },
+      {
+        currency: "BTC",
+        baseCurrency: "UAH",
+        sale: btcItem.sale * usdItem.sale
+      },
+      {
+        currency: "BTC",
+        baseCurrency: "RUR",
+        sale: (btcItem.sale * usdItem.sale) / rurItem.sale
+      }
+    ];
+
+    return pairs;
+  }
+
+  static enrichWithFakePairs(pairs) {
+    return [
+      ...pairs,
+      ...[
+        {
+          currency: "ETH",
+          baseCurrency: "USD",
+          sale: 153.86
+        },
+        {
+          currency: "ETH",
+          baseCurrency: "UAH",
+          sale: 3696.39
+        },
+        {
+          currency: "ETH",
+          baseCurrency: "RUR",
+          sale: 9842.52
+        },
+      ],
+      ...[
+        {
+          currency: "XRP",
+          baseCurrency: "USD",
+          sale: 0.22609
+        },
+        {
+          currency: "XRP",
+          baseCurrency: "UAH",
+          sale: 5.47
+        },
+        {
+          currency: "XRP",
+          baseCurrency: "RUR",
+          sale: 15.151
+        }
+      ]
+    ];
   }
 }

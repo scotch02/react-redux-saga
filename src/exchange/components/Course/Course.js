@@ -17,7 +17,7 @@ const useStyles = makeStyles(theme => ({
   }))
   
 
-export default function RRSCurrency(props) {
+export default function Course(props) {
     const { title, usd, uah, rub, selected } = props
 
     const classes = useStyles()
