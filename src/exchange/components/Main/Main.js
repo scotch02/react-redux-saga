@@ -1,10 +1,11 @@
-import React from "react";
-import { Container, Grid } from "@material-ui/core";
+import React from "react"
+import { Container, Grid } from "@material-ui/core"
 
-import Course from "../Course/Course";
-import Form from "../Form/Form";
-import { makeStyles } from "@material-ui/styles";
+import Card from "../Card/Card"
+import Form from "../Form/Form"
+import { makeStyles } from "@material-ui/styles"
 
+/*
 const currencies = [
   {
     title: "BTC",
@@ -27,7 +28,8 @@ const currencies = [
     rub: 17.228,
     selected: false
   }
-];
+]
+*/
 
 const useStyles = makeStyles(theme => ({
   currencies: {
@@ -36,17 +38,19 @@ const useStyles = makeStyles(theme => ({
   form: {
     padding: theme.spacing(8, 4, 6)
   }
-}));
+}))
 
-export default function Main() {
-  const classes = useStyles();
+export default function Main(props) {
+  const classes = useStyles()
+
+  const { cards } = props
 
   return (
     <>
       <Container maxWidth="md" component="main" className={classes.currencies}>
         <Grid container spacing={5} alignItems="flex-end">
-          {currencies.map(currency => (
-            <Course {...currency} />
+          {cards.map(card => (
+            <Card {...card} />
           ))}
         </Grid>
       </Container>
@@ -55,5 +59,32 @@ export default function Main() {
         <Form />
       </Container>
     </>
-  );
+  )
+}
+
+const buildCardStructure = (currencyPairs, currentCurrency, title) => {
+  return currencyPairs
+    .filter(({ currency }) => currency === title)
+    .reduce(
+      (currency, pair) => {
+        const { baseCurrency, sale } = pair
+        return {
+          ...currency,
+          [baseCurrency.toLowerCase()]: sale
+        }
+      },
+      {
+        title,
+        selected: currentCurrency === title
+      }
+    )
+}
+
+mapStateToProps = state => {
+  const { currencyPairs, currentCurrency } = state
+  return {
+    cards: ["BTC", "ETH", "XRP"].map(title =>
+      buildCardStructure(currencyPairs, currentCurrency, title)
+    )
+  }
 }

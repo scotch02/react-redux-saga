@@ -17,7 +17,7 @@ const useStyles = makeStyles(theme => ({
   }))
   
 
-export default function Course(props) {
+export default function Card(props) {
     const { title, usd, uah, rub, selected } = props
 
     const classes = useStyles()

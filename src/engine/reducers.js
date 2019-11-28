@@ -81,7 +81,6 @@ or
 
 const combinedReducer = combineReducers({
   currencyPairs: currencyPairsReducer,
-
   currentCurrency: currentCurrencyReducer,
   currentBaseCurrency: currentBaseCurrencyReducer,
   result: resultReducer
