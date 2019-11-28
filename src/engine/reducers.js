@@ -1,4 +1,4 @@
-import { combineReducers } from "redux";
+//import { combineReducers } from "redux";
 
 import {
   LOAD_CURRENCY_PAIRS,
@@ -18,59 +18,74 @@ const state = {
 
 */
 
-const initialState = {
-  currencyPairs: [],
-  currentCurrency: "BTC",
-  currentBaseCurrency: "UAH",
-  result: 0
-};
-
 const currencyActionMapper = {
   [LOAD_CURRENCY_PAIRS]: function(state, { payload }) {
-    return {
-      ...state,
-      currencyPairs: payload
-    };
+    return payload;
   }
 };
 
-const currencyPairsReducer = function(state = initialState, action) {
-  const typeHandler = currencyActionMapper[action.type];
-  return typeHandler ? typeHandler(state, action) : state;
+const currencyPairsReducer = function(state = [], action) {
+  const handler = currencyActionMapper[action.type];
+  return handler ? handler(state, action) : state;
 };
 
-const exchangerActionMapper = {
+const currentCurrencyActionMapper = {
   [SET_CURRENT_CURRENCY]: function(state, { payload }) {
-    return {
-      ...state,
-      currentCurrency: payload
-    };
-  },
-  [SET_CURRENT_BASE_CURRENCY]: function(state, { payload }) {
-    return {
-      ...state,
-      currentBaseCurrency: payload
-    };
-  },
-  [SET_RESULT]: function(state, { payload }) {
-    return {
-      ...state,
-      result: payload
-    };
+    return payload;
   }
 };
 
-const exchangerStateReducer = function(state = initialState, action) {
-  const typeHandler = exchangerActionMapper[action.type];
-  return typeHandler ? typeHandler(state, action) : state;
+const currentCurrencyReducer = function(state = "BTC", action) {
+  const handler = currentCurrencyActionMapper[action.type];
+  return handler ? handler(state, action) : state;
 };
+
+const currentBaseCurrencyActionMapper = {
+  [SET_CURRENT_BASE_CURRENCY]: function(state, { payload }) {
+    return payload;
+  }
+};
+
+const currentBaseCurrencyReducer = function(state = "UAH", action) {
+  const handler = currentBaseCurrencyActionMapper[action.type];
+  return handler ? handler(state, action) : state;
+};
+
+const resultActionMapper = {
+  [SET_RESULT]: function(state, { payload }) {
+    return payload;
+  }
+};
+
+const resultReducer = function(state = 0, action) {
+  const handler = resultActionMapper[action.type];
+  return handler ? handler(state, action) : state;
+};
+
+const combinedReducer = function(state = {}, action) {
+  const { currencyPairs, currentCurrency, currentBaseCurrency, result } = state;
+
+  return {
+    currencyPairs: currencyPairsReducer(currencyPairs, action),
+    currentCurrency: currentCurrencyReducer(currentCurrency, action),
+    currentBaseCurrency: currentBaseCurrencyReducer(
+      currentBaseCurrency,
+      action
+    ),
+    result: resultReducer(result, action)
+  };
+};
+
+/*
+or 
 
 const combinedReducer = combineReducers({
   currencyPairs: currencyPairsReducer,
 
-  currentCurrency: exchangerStateReducer,
-  currentBaseCurrency: exchangerStateReducer,
-  result: exchangerStateReducer
+  currentCurrency: currentCurrencyReducer,
+  currentBaseCurrency: currentBaseCurrencyReducer,
+  result: resultReducer
 });
+*/
 
 export default combinedReducer;
