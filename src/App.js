@@ -8,6 +8,15 @@ import Header from "./common/Header/Header"
 import RRSMain from "./exchange/components/Main/Main"
 import Footer from "./common/Footer/Footer"
 
+import { Provider } from 'react-redux'
+import { createStore } from 'redux'
+import combinedReducer from './engine/reducers'
+
+const store = createStore(
+  combinedReducer,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
+
 const theme = createMuiTheme({
   palette: {
     primary: purple,
@@ -35,14 +44,14 @@ function App() {
   /*   const classes = useStyles()
    */
   return (
-    <>
+    <Provider store={store}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <Header />
         <RRSMain />
         <Footer />
       </ThemeProvider>
-    </>
+    </Provider>
   )
 }
 

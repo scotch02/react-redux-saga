@@ -3,6 +3,8 @@ import { Grid, Card, CardHeader, CardContent, Typography, CardActions, Button } 
 import { makeStyles } from "@material-ui/styles"
 import StarIcon from "@material-ui/icons/StarBorder"
 
+import PropTypes from "prop-types"
+
 
 const useStyles = makeStyles(theme => ({
     cardHeader: {
@@ -17,7 +19,7 @@ const useStyles = makeStyles(theme => ({
   }))
   
 
-export default function Card(props) {
+export default function ExchangeCard(props) {
     const { title, usd, uah, rub, selected } = props
 
     const classes = useStyles()
@@ -76,4 +78,20 @@ export default function Card(props) {
       </Grid>
 
     )
+}
+
+Card.propTypes = {
+  title: PropTypes.string,
+  usd: PropTypes.number,
+  uah: PropTypes.number,
+  rub: PropTypes.number,
+  selected: PropTypes.bool
+}
+
+Card.defaultProps = {
+    title: "XXX",
+    usd: 0,
+    uah: 0,
+    rub: 0,
+    selected: false
 }

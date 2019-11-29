@@ -13,6 +13,8 @@ const state = {
     currencyPairs: Array of Object ref
     currentCurrency: String
     currentBaseCurrency: String
+    currencies: Array of String
+    baseCurrencies: Array of String 
     result: Number
 } 
 
@@ -62,8 +64,13 @@ const resultReducer = function(state = 0, action) {
   return handler ? handler(state, action) : state;
 };
 
-const combinedReducer = function(state = {}, action) {
-  const { currencyPairs, currentCurrency, currentBaseCurrency, result } = state;
+const initialState = {
+  currencies: ["BTC", "ETH", "XRP"],
+  baseCurrencies: ["USD", "UAH", "RUR"] 
+};
+
+const combinedReducer = function(state = initialState, action) {
+  const { currencyPairs, currentCurrency, currentBaseCurrency, currencies, baseCurrencies, result } = state;
 
   return {
     currencyPairs: currencyPairsReducer(currencyPairs, action),
@@ -72,6 +79,8 @@ const combinedReducer = function(state = {}, action) {
       currentBaseCurrency,
       action
     ),
+    currencies,
+    baseCurrencies, 
     result: resultReducer(result, action)
   };
 };

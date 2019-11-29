@@ -1,46 +1,23 @@
 import React from "react"
 import { Container, Grid } from "@material-ui/core"
 
-import Card from "../Card/Card"
+import Card from "../ExchangeCard/ExchangeCard"
 import Form from "../Form/Form"
 import { makeStyles } from "@material-ui/styles"
 
-/*
-const currencies = [
-  {
-    title: "BTC",
-    usd: 6800,
-    uah: 150000,
-    rub: 340000,
-    selected: false
-  },
-  {
-    title: "ETH",
-    usd: 250,
-    uah: 7400,
-    rub: 160000,
-    selected: true
-  },
-  {
-    title: "XRP",
-    usd: 0.25,
-    uah: 7.0231,
-    rub: 17.228,
-    selected: false
-  }
-]
-*/
+import PropTypes from "prop-types"
+import { connect } from "react-redux"
 
 const useStyles = makeStyles(theme => ({
   currencies: {
     padding: theme.spacing(8, 0, 0)
   },
   form: {
-    padding: theme.spacing(8, 4, 6)
+    padding: theme.spacing(8, 0, 6)
   }
 }))
 
-export default function Main(props) {
+function Main(props) {
   const classes = useStyles()
 
   const { cards } = props
@@ -62,6 +39,36 @@ export default function Main(props) {
   )
 }
 
+Main.propTypes = {
+  cards: PropTypes.array
+}
+
+Main.defaultProps = {
+  cards: [
+    {
+      title: "BTC",
+      usd: 6800,
+      uah: 150000,
+      rub: 340000,
+      selected: false
+    },
+    {
+      title: "ETH",
+      usd: 250,
+      uah: 7400,
+      rub: 160000,
+      selected: false
+    },
+    {
+      title: "XRP",
+      usd: 0.25,
+      uah: 7.0231,
+      rub: 17.228,
+      selected: false
+    }
+  ]
+}
+
 const buildCardStructure = (currencyPairs, currentCurrency, title) => {
   return currencyPairs
     .filter(({ currency }) => currency === title)
@@ -80,11 +87,13 @@ const buildCardStructure = (currencyPairs, currentCurrency, title) => {
     )
 }
 
-mapStateToProps = state => {
-  const { currencyPairs, currentCurrency } = state
+const mapStateToProps = state => {
+  const { currencyPairs, currentCurrency, currencies } = state
   return {
-    cards: ["BTC", "ETH", "XRP"].map(title =>
+    cards: currencies.map(title =>
       buildCardStructure(currencyPairs, currentCurrency, title)
     )
   }
 }
+
+export default connect(mapStateToProps)(Main)

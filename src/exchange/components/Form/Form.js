@@ -5,6 +5,9 @@ import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/styles";
 import { Button } from "@material-ui/core";
 
+import PropTypes from 'prop-types';
+import { connect } from "react-redux";
+
 const useStyles = makeStyles(theme => ({
   buttons: {
     display: "flex",
@@ -20,7 +23,9 @@ const useStyles = makeStyles(theme => ({
 
 }));
 
-export default function Form() {
+function Form(props) {
+  const { buttonOptionsArray, result } = props;
+
   const classes = useStyles();
 
   return (
@@ -44,21 +49,21 @@ export default function Form() {
         </Grid>
 
         <Grid item xs={12} md={6}></Grid>
+      </Grid>
+      <Grid container spacing={3}>
         <div className={classes.buttons}>
-          <Button variant="outlined" color="primary" className={classes.button}>
-            UAH
-          </Button>
-          <Button
-            variant="contained"
-            color="primary"
-            className={classes.button}
-          >
-            USD
-          </Button>
-          <Button variant="outlined" color="primary" className={classes.button}>
-            RUB
-          </Button>
+          {
+            buttonOptionsArray.map(buttonOptions => {
+              return (
+                <Button variant={buttonOptions.selected ? "contained" : "outlined"} color="primary" className={classes.button}>
+                  {buttonOptions.caption}
+                </Button>
+              )
+            })
+          }
         </div>
+      </Grid>
+      <Grid container spacing={3}>
         <Typography
           component="h1"
           variant="h2"
@@ -67,10 +72,37 @@ export default function Form() {
           gutterBottom
           className={classes.result}
         >
-          5 ETH will be 37000 in UAH
+          5 ETH will be {result} in UAH
       </Typography>
 
       </Grid>
     </>
   );
 }
+
+Form.propTypes = {
+  buttonOptionsArray: PropTypes.array,
+  result: PropTypes.number
+}
+
+Form.defaultProps = {
+  buttonOptionsArray: [
+    { caption: "UAH" },
+    { caption: "USD", selected: true },
+    { caption: "RUR" },
+  ],
+  result: 0
+}
+
+const mapStateToProps = (state) => {
+  const { baseCurrencies, currentBaseCurrency, result } = state
+  return {
+    buttonOptionsArray: baseCurrencies.map(title => ({
+      caption: title,
+      selected: title === currentBaseCurrency
+    })),
+    result
+  }
+}
+
+export default connect(mapStateToProps)(Form)
