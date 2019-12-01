@@ -36,7 +36,7 @@ function Main(props) {
       <Container maxWidth="md" component="main" className={classes.currencies}>
         <Grid container spacing={5} alignItems="flex-end">
           {cards.map(card => (
-            <Card {...card} />
+            <Card key={card.title} {...card} />
           ))}
         </Grid>
       </Container>

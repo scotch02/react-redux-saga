@@ -55,7 +55,7 @@ function Form(props) {
           {
             buttonOptionsArray.map(buttonOptions => {
               return (
-                <Button variant={buttonOptions.selected ? "contained" : "outlined"} color="primary" className={classes.button}>
+                <Button key={buttonOptions.caption} variant={buttonOptions.selected ? "contained" : "outlined"} color="primary" className={classes.button}>
                   {buttonOptions.caption}
                 </Button>
               )
