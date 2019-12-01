@@ -30,9 +30,12 @@ curl --header "Content-Type: application/json;charset=utf-8"  --request GET 'htt
 */
 
   static async getExchange() {
-    const requestUrl =
+/*     const requestUrl =
       "https://api.privatbank.ua/p24api/pubinfo?json&exchange&coursid=5";
-    const response = await fetch(requestUrl, {
+ */    
+      const requestUrl =
+              "p24api/pubinfo?json&exchange&coursid=5";
+      const response = await fetch(requestUrl, {
       method: "GET",
       headers: {
         "Content-Type": "application/json;charset=utf-8"
