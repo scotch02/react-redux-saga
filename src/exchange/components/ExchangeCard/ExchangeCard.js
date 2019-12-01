@@ -15,12 +15,21 @@ const useStyles = makeStyles(theme => ({
     justifyContent: "center",
     alignItems: "baseline",
     marginBottom: theme.spacing(2)
+  },
+  priceValue: {
+    fontSize: "2rem"
   }
 }))
 
 
 export default function ExchangeCard(props) {
-  const { title, usd, uah, rur, selected } = props
+/*   
+  Harry Wolff: 
+    Are you switching from using defaultProps to using object default values for your @reactjs function components? Why?
+  Dan Abramov:
+    Because defaultProps on functions will eventually get deprecated.
+ */
+  const { title = "XXX", usd = 0, uah = 0, rur = 0, selected = false } = props
 
   const classes = useStyles()
 
@@ -45,8 +54,8 @@ export default function ExchangeCard(props) {
             <Typography variant="h6" color="textSecondary">
               USD:
               </Typography>
-            <Typography component="h2" variant="h3" color="textPrimary">
-              {usd}
+            <Typography component="h2" variant="h3" color="textPrimary" className={classes.priceValue}>
+              {usd.toFixed(3)}
             </Typography>
           </div>
 
@@ -54,8 +63,8 @@ export default function ExchangeCard(props) {
             <Typography variant="h6" color="textSecondary">
               UAH:
               </Typography>
-            <Typography component="h2" variant="h3" color="textPrimary">
-              {uah}
+            <Typography component="h2" variant="h3" color="textPrimary" className={classes.priceValue}>
+              {uah.toFixed(3)}
             </Typography>
           </div>
 
@@ -63,8 +72,8 @@ export default function ExchangeCard(props) {
             <Typography variant="h6" color="textSecondary">
               RUR:
               </Typography>
-            <Typography component="h2" variant="h3" color="textPrimary">
-              {rur}
+            <Typography component="h2" variant="h3" color="textPrimary" className={classes.priceValue}>
+              {rur.toFixed(3)}
             </Typography>
           </div>
 
@@ -86,12 +95,4 @@ Card.propTypes = {
   uah: PropTypes.number,
   rur: PropTypes.number,
   selected: PropTypes.bool
-}
-
-Card.defaultProps = {
-  title: "XXX",
-  usd: 0,
-  uah: 0,
-  rur: 0,
-  selected: false
 }

@@ -60,21 +60,25 @@ curl --header "Content-Type: application/json;charset=utf-8"  --request GET 'htt
     const usdItem = privatDataArr.find(({ ccy }) => ccy === "USD");
     const rurItem = privatDataArr.find(({ ccy }) => ccy === "RUR");
 
+    const btc = parseFloat(btcItem.sale);
+    const usd = parseFloat(usdItem.sale); 
+    const rur = parseFloat(rurItem.sale); 
+
     const pairs = [
       {
         currency: "BTC",
         baseCurrency: "USD",
-        sale: btcItem.sale
+        sale: btc
       },
       {
         currency: "BTC",
         baseCurrency: "UAH",
-        sale: btcItem.sale * usdItem.sale
+        sale: btc * usd
       },
       {
         currency: "BTC",
         baseCurrency: "RUR",
-        sale: (btcItem.sale * usdItem.sale) / rurItem.sale
+        sale: (btc * usd) / rur
       }
     ];
 

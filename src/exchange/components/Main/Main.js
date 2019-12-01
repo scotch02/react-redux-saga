@@ -25,11 +25,12 @@ const useStyles = makeStyles(theme => ({
 function Main(props) {
   const classes = useStyles()
 
-  const { cards, loadCurrencyPairs } = props
+  const { cards, isEmpty, loadCurrencyPairs } = props
   // https://www.robinwieruch.de/react-hooks-fetch-data
+ 
   useEffect(()=>{
-    loadCurrencyPairs()
-  }, [loadCurrencyPairs])
+    isEmpty && loadCurrencyPairs()
+  }, [isEmpty, loadCurrencyPairs])
 
   return (
     <>
@@ -101,7 +102,8 @@ const mapStateToProps = state => {
   return {
     cards: currencies.map(title =>
       buildCardStructure(currencyPairs, currentCurrency, title)
-    )
+    ),
+    isEmpty: currencyPairs.length === 0
   }
 }
 

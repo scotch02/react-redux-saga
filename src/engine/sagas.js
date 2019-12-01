@@ -1,13 +1,13 @@
 import { call, put, takeEvery } from 'redux-saga/effects'
 import Privat from '../api/exchange/Privat'
-import { LOAD_CURRENCY_PAIRS } from './actions'
+import { LOAD_CURRENCY_PAIRS_ } from './actions'
 
 function* getExchange(action) {
     try {
         const exchange = yield call(Privat.getExchange)
         const useful = Privat.getUsefulData(exchange)
         const enriced = Privat.enrichWithFakePairs(useful)
-        yield put({ type: LOAD_CURRENCY_PAIRS, payload: enriced })
+        yield put({ type: LOAD_CURRENCY_PAIRS_, payload: enriced })
     } catch (e) {
         console.log(e)
     }

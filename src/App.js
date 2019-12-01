@@ -9,19 +9,21 @@ import RRSMain from "./exchange/components/Main/Main"
 import Footer from "./common/Footer/Footer"
 
 import { Provider } from 'react-redux'
-import { createStore, applyMiddleware } from 'redux'
+import { createStore, applyMiddleware, compose } from 'redux'
 import combinedReducer from './engine/reducers'
 
 import createSagaMiddleware from 'redux-saga'
 import mySaga from './engine/sagas'
 
-// создаем мидлвар saga
 const sagaMiddleware = createSagaMiddleware()
+
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const store = createStore(
   combinedReducer,
-  applyMiddleware(sagaMiddleware),
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  composeEnhancers(
+    applyMiddleware(sagaMiddleware)
+  )
 );
 
 // затем запускаем saga

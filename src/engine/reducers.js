@@ -1,7 +1,7 @@
 //import { combineReducers } from "redux";
 
 import {
-  LOAD_CURRENCY_PAIRS,
+  LOAD_CURRENCY_PAIRS_,
   SET_CURRENT_CURRENCY,
   SET_CURRENT_BASE_CURRENCY,
   SET_RESULT
@@ -19,7 +19,7 @@ const state = {
 */
 
 const currencyActionMapper = Object.create(null);
-currencyActionMapper[LOAD_CURRENCY_PAIRS] = function (state, { payload }) {
+currencyActionMapper[LOAD_CURRENCY_PAIRS_] = function (state, { payload }) {
   return payload;
 };
 
