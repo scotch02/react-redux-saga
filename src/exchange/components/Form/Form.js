@@ -28,6 +28,8 @@ function Form(props) {
 
   const classes = useStyles();
 
+  const error = true
+
   return (
     <>
       <Typography variant="h6" gutterBottom>
@@ -40,10 +42,9 @@ function Form(props) {
             required
             id="volume"
             label="volume"
-            helperText="How many cryptocurrencies would you like to buy"
             fullWidth
             error
-            helperText="Incorrect entry."
+            helperText={error ? "Incorrect entry." : "How many cryptocurrencies would you like to buy"}
             type="number"
           />
         </Grid>

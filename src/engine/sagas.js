@@ -1,4 +1,4 @@
-import { call, put, takeEvery, takeLatest } from 'redux-saga/effects'
+import { call, put, takeEvery } from 'redux-saga/effects'
 import Privat from '../api/exchange/Privat'
 import { LOAD_CURRENCY_PAIRS } from './actions'
 
