@@ -30,39 +30,39 @@ curl --header "Content-Type: application/json;charset=utf-8"  --request GET 'htt
 */
 
   static async getExchange() {
-/*     const requestUrl =
+    /*     const requestUrl =
       "https://api.privatbank.ua/p24api/pubinfo?json&exchange&coursid=5";
- */    
-      const requestUrl =
-              "p24api/pubinfo?json&exchange&coursid=5";
-      const response = await fetch(requestUrl, {
+ */
+
+    const requestUrl = "p24api/pubinfo?json&exchange&coursid=5"
+    const response = await fetch(requestUrl, {
       method: "GET",
       headers: {
         "Content-Type": "application/json;charset=utf-8"
       }
-    });
+    })
 
     if (!response.ok) {
-      const { status, statusText } = response;
+      const { status, statusText } = response
       throw new Error({
         requestUrl,
         method: "GET",
         status,
         statusText
-      });
+      })
     }
 
-    return response.json();
+    return response.json()
   }
 
   static getUsefulData(privatDataArr) {
-    const btcItem = privatDataArr.find(({ ccy }) => ccy === "BTC");
-    const usdItem = privatDataArr.find(({ ccy }) => ccy === "USD");
-    const rurItem = privatDataArr.find(({ ccy }) => ccy === "RUR");
+    const btcItem = privatDataArr.find(({ ccy }) => ccy === "BTC")
+    const usdItem = privatDataArr.find(({ ccy }) => ccy === "USD")
+    const rurItem = privatDataArr.find(({ ccy }) => ccy === "RUR")
 
-    const btc = parseFloat(btcItem.sale);
-    const usd = parseFloat(usdItem.sale); 
-    const rur = parseFloat(rurItem.sale); 
+    const btc = parseFloat(btcItem.sale)
+    const usd = parseFloat(usdItem.sale)
+    const rur = parseFloat(rurItem.sale)
 
     const pairs = [
       {
@@ -80,9 +80,9 @@ curl --header "Content-Type: application/json;charset=utf-8"  --request GET 'htt
         baseCurrency: "RUR",
         sale: (btc * usd) / rur
       }
-    ];
+    ]
 
-    return pairs;
+    return pairs
   }
 
   static enrichWithFakePairs(pairs) {
@@ -103,7 +103,7 @@ curl --header "Content-Type: application/json;charset=utf-8"  --request GET 'htt
           currency: "ETH",
           baseCurrency: "RUR",
           sale: 9842.52
-        },
+        }
       ],
       ...[
         {
@@ -122,6 +122,6 @@ curl --header "Content-Type: application/json;charset=utf-8"  --request GET 'htt
           sale: 15.151
         }
       ]
-    ];
+    ]
   }
 }

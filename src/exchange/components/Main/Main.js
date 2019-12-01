@@ -1,17 +1,12 @@
-import React from "react"
-import { Container, Grid } from "@material-ui/core"
-
+import React, { useEffect } from "react"
+import { connect } from "react-redux"
+import Container from "@material-ui/core/Container"
+import Grid from "@material-ui/core/Grid"
+import makeStyles from "@material-ui/styles/makeStyles"
+import PropTypes from "prop-types"
 import Card from "../ExchangeCard/ExchangeCard"
 import Form from "../Form/Form"
-import { makeStyles } from "@material-ui/styles"
-
-import PropTypes from "prop-types"
-import { connect } from "react-redux"
-
-import {LOAD_CURRENCY_PAIRS} from "../../../engine/actions"
-
-// Core
-import { useEffect } from 'react';
+import { LOAD_CURRENCY_PAIRS } from "../../../engine/actions"
 
 const useStyles = makeStyles(theme => ({
   currencies: {
@@ -27,9 +22,11 @@ function Main(props) {
 
   const { cards, isEmpty, loadCurrencyPairs } = props
   // https://www.robinwieruch.de/react-hooks-fetch-data
- 
-  useEffect(()=>{
-    isEmpty && loadCurrencyPairs()
+
+  useEffect(() => {
+    if (isEmpty) {
+      loadCurrencyPairs()
+    }
   }, [isEmpty, loadCurrencyPairs])
 
   return (
@@ -50,7 +47,9 @@ function Main(props) {
 }
 
 Main.propTypes = {
-  cards: PropTypes.array
+  cards: PropTypes.array,
+  isEmpty: PropTypes.bool,
+  loadCurrencyPairs: PropTypes.func
 }
 
 Main.defaultProps = {
@@ -76,7 +75,9 @@ Main.defaultProps = {
       rur: 17.228,
       selected: false
     }
-  ]
+  ],
+  isEmpty: false,
+  loadCurrencyPairs: () => {}
 }
 
 const buildCardStructure = (currencyPairs, currentCurrency, title) => {
@@ -107,12 +108,12 @@ const mapStateToProps = state => {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
     loadCurrencyPairs: () => {
-      dispatch({type: LOAD_CURRENCY_PAIRS})
+      dispatch({ type: LOAD_CURRENCY_PAIRS })
     }
   }
-} 
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(Main)

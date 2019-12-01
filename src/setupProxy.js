@@ -1,11 +1,11 @@
-const proxy = require('http-proxy-middleware');
+const proxy = require("http-proxy-middleware")
 
 module.exports = function(app) {
   app.use(
-    '/p24api',
+    "/p24api",
     proxy({
-      target: 'https://api.privatbank.ua',
-      changeOrigin: true,
+      target: "https://api.privatbank.ua",
+      changeOrigin: true
     })
-  );
-};
+  )
+}

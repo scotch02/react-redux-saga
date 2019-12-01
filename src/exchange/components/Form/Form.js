@@ -1,12 +1,12 @@
-import React from "react";
-import Typography from "@material-ui/core/Typography";
-import Grid from "@material-ui/core/Grid";
-import TextField from "@material-ui/core/TextField";
-import { makeStyles } from "@material-ui/styles";
-import { Button } from "@material-ui/core";
+import React from "react"
+import Typography from "@material-ui/core/Typography"
+import Grid from "@material-ui/core/Grid"
+import TextField from "@material-ui/core/TextField"
+import { makeStyles } from "@material-ui/styles"
+import { Button } from "@material-ui/core"
 
-import PropTypes from 'prop-types';
-import { connect } from "react-redux";
+import PropTypes from "prop-types"
+import { connect } from "react-redux"
 
 const useStyles = makeStyles(theme => ({
   buttons: {
@@ -20,13 +20,12 @@ const useStyles = makeStyles(theme => ({
   result: {
     padding: theme.spacing(8, 0, 0)
   }
-
-}));
+}))
 
 function Form(props) {
-  const { buttonOptionsArray, result } = props;
+  const { buttonOptionsArray, result } = props
 
-  const classes = useStyles();
+  const classes = useStyles()
 
   const error = true
 
@@ -44,24 +43,29 @@ function Form(props) {
             label="volume"
             fullWidth
             error
-            helperText={error ? "Incorrect entry." : "How many cryptocurrencies would you like to buy"}
+            helperText={
+              error
+                ? "Incorrect entry."
+                : "How many cryptocurrencies would you like to buy"
+            }
             type="number"
           />
         </Grid>
-
-        <Grid item xs={12} md={6}></Grid>
       </Grid>
       <Grid container spacing={3}>
         <div className={classes.buttons}>
-          {
-            buttonOptionsArray.map(buttonOptions => {
-              return (
-                <Button key={buttonOptions.caption} variant={buttonOptions.selected ? "contained" : "outlined"} color="primary" className={classes.button}>
-                  {buttonOptions.caption}
-                </Button>
-              )
-            })
-          }
+          {buttonOptionsArray.map(buttonOptions => {
+            return (
+              <Button
+                key={buttonOptions.caption}
+                variant={buttonOptions.selected ? "contained" : "outlined"}
+                color="primary"
+                className={classes.button}
+              >
+                {buttonOptions.caption}
+              </Button>
+            )
+          })}
         </div>
       </Grid>
       <Grid container spacing={3}>
@@ -74,11 +78,10 @@ function Form(props) {
           className={classes.result}
         >
           5 ETH will be {result} in UAH
-      </Typography>
-
+        </Typography>
       </Grid>
     </>
-  );
+  )
 }
 
 Form.propTypes = {
@@ -90,12 +93,12 @@ Form.defaultProps = {
   buttonOptionsArray: [
     { caption: "UAH" },
     { caption: "USD", selected: true },
-    { caption: "RUR" },
+    { caption: "RUR" }
   ],
   result: 0
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   const { baseCurrencies, currentBaseCurrency, result } = state
   return {
     buttonOptionsArray: baseCurrencies.map(title => ({

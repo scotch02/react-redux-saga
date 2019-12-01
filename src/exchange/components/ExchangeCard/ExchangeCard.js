@@ -1,10 +1,17 @@
 import React from "react"
-import { Grid, Card, CardHeader, CardContent, Typography, CardActions, Button } from "@material-ui/core"
+import {
+  Grid,
+  Card,
+  CardHeader,
+  CardContent,
+  Typography,
+  CardActions,
+  Button
+} from "@material-ui/core"
 import { makeStyles } from "@material-ui/styles"
 import StarIcon from "@material-ui/icons/StarBorder"
 
 import PropTypes from "prop-types"
-
 
 const useStyles = makeStyles(theme => ({
   cardHeader: {
@@ -21,9 +28,8 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-
 export default function ExchangeCard(props) {
-/*   
+  /*   
   Harry Wolff: 
     Are you switching from using defaultProps to using object default values for your @reactjs function components? Why?
   Dan Abramov:
@@ -34,13 +40,7 @@ export default function ExchangeCard(props) {
   const classes = useStyles()
 
   return (
-    <Grid
-      item
-      key={title}
-      xs={12}
-      sm={6}
-      md={4}
-    >
+    <Grid item key={title} xs={12} sm={6} md={4}>
       <Card>
         <CardHeader
           title={title}
@@ -53,8 +53,13 @@ export default function ExchangeCard(props) {
           <div className={classes.cardPricing}>
             <Typography variant="h6" color="textSecondary">
               USD:
-              </Typography>
-            <Typography component="h2" variant="h3" color="textPrimary" className={classes.priceValue}>
+            </Typography>
+            <Typography
+              component="h2"
+              variant="h3"
+              color="textPrimary"
+              className={classes.priceValue}
+            >
               {usd.toFixed(3)}
             </Typography>
           </div>
@@ -62,8 +67,13 @@ export default function ExchangeCard(props) {
           <div className={classes.cardPricing}>
             <Typography variant="h6" color="textSecondary">
               UAH:
-              </Typography>
-            <Typography component="h2" variant="h3" color="textPrimary" className={classes.priceValue}>
+            </Typography>
+            <Typography
+              component="h2"
+              variant="h3"
+              color="textPrimary"
+              className={classes.priceValue}
+            >
               {uah.toFixed(3)}
             </Typography>
           </div>
@@ -71,25 +81,32 @@ export default function ExchangeCard(props) {
           <div className={classes.cardPricing}>
             <Typography variant="h6" color="textSecondary">
               RUR:
-              </Typography>
-            <Typography component="h2" variant="h3" color="textPrimary" className={classes.priceValue}>
+            </Typography>
+            <Typography
+              component="h2"
+              variant="h3"
+              color="textPrimary"
+              className={classes.priceValue}
+            >
               {rur.toFixed(3)}
             </Typography>
           </div>
-
         </CardContent>
         <CardActions>
-          <Button fullWidth variant={selected ? "contained" : "outlined"} color="primary">
+          <Button
+            fullWidth
+            variant={selected ? "contained" : "outlined"}
+            color="primary"
+          >
             Select
-            </Button>
+          </Button>
         </CardActions>
       </Card>
     </Grid>
-
   )
 }
 
-Card.propTypes = {
+ExchangeCard.propTypes = {
   title: PropTypes.string,
   usd: PropTypes.number,
   uah: PropTypes.number,

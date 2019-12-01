@@ -44,7 +44,7 @@ export default function Header() {
             href="#"
             className={classes.link}
           >
-            Exchange 
+            Exchange
           </Link>
           <Link
             variant="button"

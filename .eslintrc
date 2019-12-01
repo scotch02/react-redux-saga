@@ -18,5 +18,8 @@
           "semi": false
         }
       ]
+    },
+    "env": {
+      "browser": true
     }
   }

@@ -4,27 +4,24 @@ import CssBaseline from "@material-ui/core/CssBaseline"
 import { ThemeProvider } from "@material-ui/styles"
 import { createMuiTheme } from "@material-ui/core"
 import { purple, green } from "@material-ui/core/colors"
+import { Provider } from "react-redux"
+import { createStore, applyMiddleware, compose } from "redux"
+import createSagaMiddleware from "redux-saga"
+import mySaga from "./engine/sagas"
 import Header from "./common/Header/Header"
 import RRSMain from "./exchange/components/Main/Main"
 import Footer from "./common/Footer/Footer"
 
-import { Provider } from 'react-redux'
-import { createStore, applyMiddleware, compose } from 'redux'
-import combinedReducer from './engine/reducers'
-
-import createSagaMiddleware from 'redux-saga'
-import mySaga from './engine/sagas'
+import combinedReducer from "./engine/reducers"
 
 const sagaMiddleware = createSagaMiddleware()
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
 const store = createStore(
   combinedReducer,
-  composeEnhancers(
-    applyMiddleware(sagaMiddleware)
-  )
-);
+  composeEnhancers(applyMiddleware(sagaMiddleware))
+)
 
 // затем запускаем saga
 sagaMiddleware.run(mySaga)
