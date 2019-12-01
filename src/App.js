@@ -9,13 +9,23 @@ import RRSMain from "./exchange/components/Main/Main"
 import Footer from "./common/Footer/Footer"
 
 import { Provider } from 'react-redux'
-import { createStore } from 'redux'
+import { createStore, applyMiddleware } from 'redux'
 import combinedReducer from './engine/reducers'
+
+import createSagaMiddleware from 'redux-saga'
+import mySaga from './engine/sagas'
+
+// создаем мидлвар saga
+const sagaMiddleware = createSagaMiddleware()
 
 const store = createStore(
   combinedReducer,
+  applyMiddleware(sagaMiddleware),
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
+
+// затем запускаем saga
+sagaMiddleware.run(mySaga)
 
 const theme = createMuiTheme({
   palette: {

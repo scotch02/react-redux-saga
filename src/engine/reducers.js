@@ -8,7 +8,6 @@ import {
 } from "./actions";
 
 /*
-
 const state = {
     currencyPairs: Array of Object ref
     currentCurrency: String
@@ -17,59 +16,54 @@ const state = {
     baseCurrencies: Array of String 
     result: Number
 } 
-
 */
 
-const currencyActionMapper = {
-  [LOAD_CURRENCY_PAIRS]: function(state, { payload }) {
-    return payload;
-  }
+const currencyActionMapper = Object.create(null);
+currencyActionMapper[LOAD_CURRENCY_PAIRS] = function (state, { payload }) {
+  return payload;
 };
 
-const currencyPairsReducer = function(state = [], action) {
+const currencyPairsReducer = function (state = [], action) {
   const handler = currencyActionMapper[action.type];
   return handler ? handler(state, action) : state;
 };
 
-const currentCurrencyActionMapper = {
-  [SET_CURRENT_CURRENCY]: function(state, { payload }) {
-    return payload;
-  }
+const currentCurrencyActionMapper = Object.create(null)
+currentCurrencyActionMapper[SET_CURRENT_CURRENCY] = function (state, { payload }) {
+  return payload;
 };
 
-const currentCurrencyReducer = function(state = "BTC", action) {
+const currentCurrencyReducer = function (state = "BTC", action) {
   const handler = currentCurrencyActionMapper[action.type];
   return handler ? handler(state, action) : state;
 };
 
-const currentBaseCurrencyActionMapper = {
-  [SET_CURRENT_BASE_CURRENCY]: function(state, { payload }) {
+const currentBaseCurrencyActionMapper = Object.create(null);
+currentBaseCurrencyActionMapper[SET_CURRENT_BASE_CURRENCY] = function (state, { payload }) {
     return payload;
-  }
 };
 
-const currentBaseCurrencyReducer = function(state = "UAH", action) {
+const currentBaseCurrencyReducer = function (state = "UAH", action) {
   const handler = currentBaseCurrencyActionMapper[action.type];
   return handler ? handler(state, action) : state;
 };
 
-const resultActionMapper = {
-  [SET_RESULT]: function(state, { payload }) {
+const resultActionMapper = Object.create(null);
+resultActionMapper[SET_RESULT] = function (state, { payload }) {
     return payload;
-  }
 };
 
-const resultReducer = function(state = 0, action) {
+const resultReducer = function (state = 0, action) {
   const handler = resultActionMapper[action.type];
   return handler ? handler(state, action) : state;
 };
 
 const initialState = {
   currencies: ["BTC", "ETH", "XRP"],
-  baseCurrencies: ["USD", "UAH", "RUR"] 
+  baseCurrencies: ["USD", "UAH", "RUR"]
 };
 
-const combinedReducer = function(state = initialState, action) {
+const combinedReducer = function (state = initialState, action) {
   const { currencyPairs, currentCurrency, currentBaseCurrency, currencies, baseCurrencies, result } = state;
 
   return {
@@ -80,7 +74,7 @@ const combinedReducer = function(state = initialState, action) {
       action
     ),
     currencies,
-    baseCurrencies, 
+    baseCurrencies,
     result: resultReducer(result, action)
   };
 };

@@ -8,6 +8,11 @@ import { makeStyles } from "@material-ui/styles"
 import PropTypes from "prop-types"
 import { connect } from "react-redux"
 
+import {LOAD_CURRENCY_PAIRS} from "../../../engine/actions"
+
+// Core
+import { useEffect } from 'react';
+
 const useStyles = makeStyles(theme => ({
   currencies: {
     padding: theme.spacing(8, 0, 0)
@@ -20,7 +25,11 @@ const useStyles = makeStyles(theme => ({
 function Main(props) {
   const classes = useStyles()
 
-  const { cards } = props
+  const { cards, loadCurrencyPairs } = props
+  // https://www.robinwieruch.de/react-hooks-fetch-data
+  useEffect(()=>{
+    loadCurrencyPairs()
+  }, [loadCurrencyPairs])
 
   return (
     <>
@@ -49,21 +58,21 @@ Main.defaultProps = {
       title: "BTC",
       usd: 6800,
       uah: 150000,
-      rub: 340000,
+      rur: 340000,
       selected: false
     },
     {
       title: "ETH",
       usd: 250,
       uah: 7400,
-      rub: 160000,
+      rur: 160000,
       selected: false
     },
     {
       title: "XRP",
       usd: 0.25,
       uah: 7.0231,
-      rub: 17.228,
+      rur: 17.228,
       selected: false
     }
   ]
@@ -96,4 +105,12 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps)(Main)
+const mapDispatchToProps = (dispatch) => {
+  return {
+    loadCurrencyPairs: () => {
+      dispatch({type: LOAD_CURRENCY_PAIRS})
+    }
+  }
+} 
+
+export default connect(mapStateToProps, mapDispatchToProps)(Main)

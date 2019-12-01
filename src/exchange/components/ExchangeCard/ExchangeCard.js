@@ -7,91 +7,91 @@ import PropTypes from "prop-types"
 
 
 const useStyles = makeStyles(theme => ({
-    cardHeader: {
-      backgroundColor: theme.palette.grey[200]
-    },
-    cardPricing: {
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "baseline",
-      marginBottom: theme.spacing(2)
-    }
-  }))
-  
+  cardHeader: {
+    backgroundColor: theme.palette.grey[200]
+  },
+  cardPricing: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "baseline",
+    marginBottom: theme.spacing(2)
+  }
+}))
+
 
 export default function ExchangeCard(props) {
-    const { title, usd, uah, rub, selected } = props
+  const { title, usd, uah, rur, selected } = props
 
-    const classes = useStyles()
-    
-    return (
-        <Grid
-        item
-        key={ title }
-        xs={12}
-        sm={6}
-        md={4}
-      >
-        <Card>
-          <CardHeader
-            title={ title }
-            titleTypographyProps={{ align: "center" }}
-            subheaderTypographyProps={{ align: "center" }}
-            action={title === "Pro" ? <StarIcon /> : null}
-            className={classes.cardHeader}
-          />
-          <CardContent>
-            <div className={classes.cardPricing}>
+  const classes = useStyles()
+
+  return (
+    <Grid
+      item
+      key={title}
+      xs={12}
+      sm={6}
+      md={4}
+    >
+      <Card>
+        <CardHeader
+          title={title}
+          titleTypographyProps={{ align: "center" }}
+          subheaderTypographyProps={{ align: "center" }}
+          action={title === "Pro" ? <StarIcon /> : null}
+          className={classes.cardHeader}
+        />
+        <CardContent>
+          <div className={classes.cardPricing}>
             <Typography variant="h6" color="textSecondary">
-                USD:
+              USD:
               </Typography>
-              <Typography component="h2" variant="h3" color="textPrimary">
-                { usd }
-              </Typography>
-            </div>
+            <Typography component="h2" variant="h3" color="textPrimary">
+              {usd}
+            </Typography>
+          </div>
 
-            <div className={classes.cardPricing}>
+          <div className={classes.cardPricing}>
             <Typography variant="h6" color="textSecondary">
-                UAH:
+              UAH:
               </Typography>
-              <Typography component="h2" variant="h3" color="textPrimary">
-                { uah }
-              </Typography>
-            </div>
+            <Typography component="h2" variant="h3" color="textPrimary">
+              {uah}
+            </Typography>
+          </div>
 
-            <div className={classes.cardPricing}>
+          <div className={classes.cardPricing}>
             <Typography variant="h6" color="textSecondary">
-                RUB:
+              RUR:
               </Typography>
-              <Typography component="h2" variant="h3" color="textPrimary">
-                { rub }
-              </Typography>
-            </div>
+            <Typography component="h2" variant="h3" color="textPrimary">
+              {rur}
+            </Typography>
+          </div>
 
-          </CardContent>
-          <CardActions>
-            <Button fullWidth variant={ selected ? "contained" : "outlined" } color="primary">
-              Select 
+        </CardContent>
+        <CardActions>
+          <Button fullWidth variant={selected ? "contained" : "outlined"} color="primary">
+            Select
             </Button>
-          </CardActions>
-        </Card>
-      </Grid>
+        </CardActions>
+      </Card>
+    </Grid>
 
-    )
+  )
 }
 
 Card.propTypes = {
   title: PropTypes.string,
   usd: PropTypes.number,
   uah: PropTypes.number,
-  rub: PropTypes.number,
+  rur: PropTypes.number,
   selected: PropTypes.bool
 }
 
 Card.defaultProps = {
-    title: "XXX",
-    usd: 0,
-    uah: 0,
-    rub: 0,
-    selected: false
+  title: "XXX",
+  usd: 0,
+  uah: 0,
+  rur: 0,
+  selected: false
 }
