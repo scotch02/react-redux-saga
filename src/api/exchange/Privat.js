@@ -1,6 +1,6 @@
 export default class Privat {
   /*
-curl --header "Content-Type: application/json;charset=utf-8"  --request GET 'https://api.privatbank.ua/p24api/pubinfo?json&exchange&coursid=5'
+curl --include --header "Content-Type: application/json;charset=utf-8"  --request GET "https://api.privatbank.ua/p24api/pubinfo?json&exchange&coursid=5"
 [
     {
         "ccy":"USD",
