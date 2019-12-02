@@ -1,9 +1,4 @@
-import {
-  LOAD_CURRENCY_PAIRS_,
-  SET_CURRENT_CURRENCY,
-  SET_CURRENT_BASE_CURRENCY,
-  SET_RESULT
-} from "./actions"
+import { types } from "./actionTypes"
 
 /*
 const state = {
@@ -17,7 +12,7 @@ const state = {
 */
 
 const currencyActionMapper = Object.create(null)
-currencyActionMapper[LOAD_CURRENCY_PAIRS_] = (state, { payload }) => {
+currencyActionMapper[types.LOAD_CURRENCY_PAIRS] = (state, { payload }) => {
   return payload
 }
 
@@ -27,7 +22,7 @@ const currencyPairsReducer = (state = [], action) => {
 }
 
 const currentCurrencyActionMapper = Object.create(null)
-currentCurrencyActionMapper[SET_CURRENT_CURRENCY] = (state, { payload }) => {
+currentCurrencyActionMapper[types.SET_CURRENT_CURRENCY] = (state, { payload }) => {
   return payload
 }
 
@@ -37,10 +32,7 @@ const currentCurrencyReducer = (state = "BTC", action) => {
 }
 
 const currentBaseCurrencyActionMapper = Object.create(null)
-currentBaseCurrencyActionMapper[SET_CURRENT_BASE_CURRENCY] = (
-  state,
-  { payload }
-) => {
+currentBaseCurrencyActionMapper[types.SET_CURRENT_BASE_CURRENCY] = ( state, { payload } ) => {
   return payload
 }
 
@@ -50,7 +42,7 @@ const currentBaseCurrencyReducer = (state = "UAH", action) => {
 }
 
 const resultActionMapper = Object.create(null)
-resultActionMapper[SET_RESULT] = (state, { payload }) => {
+resultActionMapper[types.SET_RESULT] = (state, { payload }) => {
   return payload
 }
 

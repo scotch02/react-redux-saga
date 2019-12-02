@@ -1,24 +1,21 @@
 import { call, put, takeEvery } from "redux-saga/effects"
 import Privat from "../api/exchange/Privat"
-import { LOAD_CURRENCY_PAIRS_ } from "./actions"
+import { loadCurrencyPairsActionCreator } from "./actionCreators"
+import { asyncTypes } from "./asyncActionTypes"
 
 function* getExchange() {
   try {
     const exchange = yield call(Privat.getExchange)
     const useful = Privat.getUsefulData(exchange)
     const enriced = Privat.enrichWithFakePairs(useful)
-    yield put({ type: LOAD_CURRENCY_PAIRS_, payload: enriced })
+    yield put(loadCurrencyPairsActionCreator(enriced))
   } catch (e) {
     console.log(e)
   }
 }
 
-/*
-  Запускаем `fetchUser` на каждое задиспатченное действие `USER_FETCH_REQUESTED`.
-  Позволяет одновременно получать данные пользователей.
-*/
-function* mySaga() {
-  yield takeEvery("LOAD_CURRENCY_PAIRS", getExchange)
+function* rootSaga() {
+  yield takeEvery(asyncTypes.LOAD_CURRENCY_PAIRS_ASYNC, getExchange)
 }
 
-export default mySaga
+export default rootSaga

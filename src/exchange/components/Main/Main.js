@@ -6,7 +6,7 @@ import makeStyles from "@material-ui/styles/makeStyles"
 import PropTypes from "prop-types"
 import Card from "../ExchangeCard/ExchangeCard"
 import Form from "../Form/Form"
-import { LOAD_CURRENCY_PAIRS } from "../../../engine/actions"
+import { loadCurrencyPairsAsyncActionCreator } from "../../../engine/asyncActionCreators"
 
 const useStyles = makeStyles(theme => ({
   currencies: {
@@ -111,7 +111,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     loadCurrencyPairs: () => {
-      dispatch({ type: LOAD_CURRENCY_PAIRS })
+      dispatch(loadCurrencyPairsAsyncActionCreator())
     }
   }
 }
