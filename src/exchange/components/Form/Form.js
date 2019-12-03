@@ -8,6 +8,12 @@ import { Button } from "@material-ui/core"
 import PropTypes from "prop-types"
 import { connect } from "react-redux"
 
+import {
+  setResultAsyncActionCreator,
+  setCurrentCurrencyAsyncActionCreator,
+  setCurrentBaseCurrencyAsyncActionCreator
+} from "../../../engine/asyncActionCreators"
+
 const useStyles = makeStyles(theme => ({
   buttons: {
     display: "flex",
@@ -23,9 +29,17 @@ const useStyles = makeStyles(theme => ({
 }))
 
 function Form(props) {
-  const { buttonOptionsArray, result } = props
+  const { buttonOptionsArray, result, setResult, setCurrentBaseCurrency } = props
 
   const classes = useStyles()
+
+  const handleInput = event => {
+    setResult(parseFloat(event.target.value))
+  }
+
+  const handleChangeCurrentBaseCurrency = event => {
+    setCurrentBaseCurrency(event.target.value)
+  }
 
   const error = true
 
@@ -49,6 +63,7 @@ function Form(props) {
                 : "How many cryptocurrencies would you like to buy"
             }
             type="number"
+            onInput={handleInput}
           />
         </Grid>
       </Grid>
@@ -58,9 +73,11 @@ function Form(props) {
             return (
               <Button
                 key={buttonOptions.caption}
+                value={buttonOptions.caption}
                 variant={buttonOptions.selected ? "contained" : "outlined"}
                 color="primary"
                 className={classes.button}
+                onClick={handleChangeCurrentBaseCurrency}
               >
                 {buttonOptions.caption}
               </Button>
@@ -109,4 +126,18 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps)(Form)
+const mapDispatchToProps = dispatch => {
+  return {
+    setResult: value => {
+      dispatch(setResultAsyncActionCreator(value))
+    },
+    setCurrentCurrency: value => {
+      dispatch(setCurrentCurrencyAsyncActionCreator(value))
+    },
+    setCurrentBaseCurrency: value => {
+      dispatch(setCurrentBaseCurrencyAsyncActionCreator(value))
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Form)

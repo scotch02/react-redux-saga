@@ -7,6 +7,7 @@ const state = {
     currentBaseCurrency: String
     currencies: Array of String
     baseCurrencies: Array of String 
+    value: Number
     result: Number
 } 
 */
@@ -41,6 +42,16 @@ const currentBaseCurrencyReducer = (state = "UAH", action) => {
   return handler ? handler(state, action) : state
 }
 
+const valueActionMapper = Object.create(null)
+valueActionMapper[types.SET_VALUE] = (state, { payload }) => {
+  return payload
+}
+
+const valueReducer = (state = 0, action) => {
+  const handler = valueActionMapper[action.type]
+  return handler ? handler(state, action) : state
+}
+
 const resultActionMapper = Object.create(null)
 resultActionMapper[types.SET_RESULT] = (state, { payload }) => {
   return payload
@@ -63,6 +74,7 @@ const combinedReducer = (state = initialState, action) => {
     currentBaseCurrency,
     currencies,
     baseCurrencies,
+    value,
     result
   } = state
 
@@ -75,6 +87,7 @@ const combinedReducer = (state = initialState, action) => {
     ),
     currencies,
     baseCurrencies,
+    value: valueReducer(value, action),
     result: resultReducer(result, action)
   }
 }

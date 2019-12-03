@@ -13,6 +13,12 @@ import StarIcon from "@material-ui/icons/StarBorder"
 
 import PropTypes from "prop-types"
 
+import { connect } from "react-redux"
+
+import {
+  setCurrentCurrencyAsyncActionCreator
+} from "../../../engine/asyncActionCreators"
+
 const useStyles = makeStyles(theme => ({
   cardHeader: {
     backgroundColor: theme.palette.grey[200]
@@ -28,16 +34,20 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-export default function ExchangeCard(props) {
+function ExchangeCard(props) {
   /*   
   Harry Wolff: 
     Are you switching from using defaultProps to using object default values for your @reactjs function components? Why?
   Dan Abramov:
     Because defaultProps on functions will eventually get deprecated.
  */
-  const { title = "XXX", usd = 0, uah = 0, rur = 0, selected = false } = props
+  const { title = "XXX", usd = 0, uah = 0, rur = 0, selected = false, setCurrentCurrency } = props
 
   const classes = useStyles()
+
+   const handleChangeCurrentCurrency = event => {
+    setCurrentCurrency(event.target.value)  
+   }
 
   return (
     <Grid item key={title} xs={12} sm={6} md={4}>
@@ -97,6 +107,7 @@ export default function ExchangeCard(props) {
             fullWidth
             variant={selected ? "contained" : "outlined"}
             color="primary"
+            value={title}
           >
             Select
           </Button>
@@ -113,3 +124,14 @@ ExchangeCard.propTypes = {
   rur: PropTypes.number,
   selected: PropTypes.bool
 }
+
+const mapDispatchToProps = dispatch => {
+  return {
+    setCurrentCurrency: value => {
+      dispatch(setCurrentCurrencyAsyncActionCreator(value))
+    }
+  }
+}
+
+export default connect(null, mapDispatchToProps)(ExchangeCard)
+

@@ -21,6 +21,13 @@ export function setCurrentBaseCurrencyActionCreator(currency) {
   }
 }
 
+export function setValueActionCreator(result) {
+  return {
+    type: types.SET_VALUE,
+    payload: result
+  }
+}
+
 export function setResultActionCreator(result) {
   return {
     type: types.SET_RESULT,
