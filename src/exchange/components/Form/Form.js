@@ -29,7 +29,14 @@ const useStyles = makeStyles(theme => ({
 }))
 
 function Form(props) {
-  const { buttonOptionsArray, result, setResult, setCurrentBaseCurrency } = props
+  const {
+    buttonOptionsArray,
+    setResult,
+    setCurrentBaseCurrency,
+    result,
+    currentBaseCurrency,
+    currentCurrency,
+    value } = props
 
   const classes = useStyles()
 
@@ -38,7 +45,7 @@ function Form(props) {
   }
 
   const handleChangeCurrentBaseCurrency = event => {
-    setCurrentBaseCurrency(event.target.value)
+    setCurrentBaseCurrency(event.currentTarget.value)
   }
 
   const error = true
@@ -94,7 +101,7 @@ function Form(props) {
           gutterBottom
           className={classes.result}
         >
-          5 ETH will be {result} in UAH
+          {value} {currentCurrency} will be {result} in {currentBaseCurrency}
         </Typography>
       </Grid>
     </>
@@ -116,13 +123,16 @@ Form.defaultProps = {
 }
 
 const mapStateToProps = state => {
-  const { baseCurrencies, currentBaseCurrency, result } = state
+  const { baseCurrencies, currentBaseCurrency, currentCurrency, value, result } = state
   return {
     buttonOptionsArray: baseCurrencies.map(title => ({
       caption: title,
       selected: title === currentBaseCurrency
     })),
-    result
+    result,
+    currentBaseCurrency,
+    currentCurrency,
+    value
   }
 }
 

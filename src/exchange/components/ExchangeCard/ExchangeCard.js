@@ -46,7 +46,7 @@ function ExchangeCard(props) {
   const classes = useStyles()
 
    const handleChangeCurrentCurrency = event => {
-    setCurrentCurrency(event.target.value)  
+    setCurrentCurrency(event.currentTarget.value)  
    }
 
   return (
@@ -108,6 +108,7 @@ function ExchangeCard(props) {
             variant={selected ? "contained" : "outlined"}
             color="primary"
             value={title}
+            onClick = {handleChangeCurrentCurrency}
           >
             Select
           </Button>

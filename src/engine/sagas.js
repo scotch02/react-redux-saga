@@ -31,13 +31,15 @@ function* setValue({ payload: value }) {
 
   const currentBaseCurrency = yield select(getCurrentBaseCurrency)
   const currentCurrency = yield select(getCurrentCurrency)
-  const currencyPair = yield select(getCurrencyPairs)
-  const pair = currencyPair.find(
-    ({ currency, baseCurrency }) =>
-      currency === currentCurrency && baseCurrency === currentBaseCurrency
-  )
-  const result = value * pair.sale
-  yield put(setResultActionCreator(result))
+  const currencyPairs = yield select(getCurrencyPairs)
+  if (currencyPairs.length > 0) {
+    const pair = currencyPairs.find(
+      ({ currency, baseCurrency }) =>
+        currency === currentCurrency && baseCurrency === currentBaseCurrency
+    )
+    const result = value * pair.sale
+    yield put(setResultActionCreator(result))
+  }
 }
 
 function* setCurrentCurrency({ payload: currentCurrency }) {
@@ -45,29 +47,31 @@ function* setCurrentCurrency({ payload: currentCurrency }) {
 
   const value = yield select(getValue)
   const currentBaseCurrency = yield select(getCurrentBaseCurrency)
-  //const currentCurrency = yield select(getCurrentCurrency)
-  const currencyPair = yield select(getCurrencyPairs)
-  const pair = currencyPair.find(
-    ({ currency, baseCurrency }) =>
-      currency === currentCurrency && baseCurrency === currentBaseCurrency
-  )
-  const result = value * pair.sale
-  yield put(setResultActionCreator(result))
+  const currencyPairs = yield select(getCurrencyPairs)
+  if (currencyPairs.length > 0) {
+    const pair = currencyPairs.find(
+      ({ currency, baseCurrency }) =>
+        currency === currentCurrency && baseCurrency === currentBaseCurrency
+    )
+    const result = value * pair.sale
+    yield put(setResultActionCreator(result))
+  }
 }
 
 function* setCurrentBaseCurrency({ payload: currentBaseCurrency }) {
   yield put(setCurrentBaseCurrencyActionCreator(currentBaseCurrency))
 
   const value = yield select(getValue)
-  //const currentBaseCurrency = yield select(getCurrentBaseCurrency)
   const currentCurrency = yield select(getCurrentCurrency)
-  const currencyPair = yield select(getCurrencyPairs)
-  const pair = currencyPair.find(
-    ({ currency, baseCurrency }) =>
-      currency === currentCurrency && baseCurrency === currentBaseCurrency
-  )
-  const result = value * pair.sale
-  yield put(setResultActionCreator(result))
+  const currencyPairs = yield select(getCurrencyPairs)
+  if (currencyPairs.length > 0) {
+    const pair = currencyPairs.find(
+      ({ currency, baseCurrency }) =>
+        currency === currentCurrency && baseCurrency === currentBaseCurrency
+    )
+    const result = value * pair.sale
+    yield put(setResultActionCreator(result))
+  }
 }
 
 function* rootSaga() {
