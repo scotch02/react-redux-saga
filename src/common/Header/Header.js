@@ -60,7 +60,7 @@ export default function Header() {
             href="#"
             className={classes.link}
           >
-            React Redux UI
+            Orders
           </Link>
         </nav>
         <Button

@@ -9,7 +9,8 @@ import { createStore, applyMiddleware, compose } from "redux"
 import createSagaMiddleware from "redux-saga"
 import mySaga from "./engine/sagas"
 import Header from "./common/Header/Header"
-import RRSMain from "./exchange/components/Main/Main"
+import ExchangePage from "./exchange/components/Main/Main"
+import OrdersPage from "./orders/Pages/Main/Main"
 import Footer from "./common/Footer/Footer"
 
 import combinedReducer from "./engine/reducers"
@@ -57,7 +58,8 @@ function App() {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <Header />
-        <RRSMain />
+        {/* <ExchangePage /> */}
+        <OrdersPage />
         <Footer />
       </ThemeProvider>
     </Provider>
