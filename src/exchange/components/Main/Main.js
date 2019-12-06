@@ -47,7 +47,7 @@ function Main(props) {
 }
 
 Main.propTypes = {
-  cards: PropTypes.array,
+  cards: PropTypes.arrayOf(PropTypes.object),
   isEmpty: PropTypes.bool,
   loadCurrencyPairs: PropTypes.func
 }

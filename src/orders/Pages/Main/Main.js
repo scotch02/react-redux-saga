@@ -12,7 +12,7 @@ const useStyles = makeStyles(theme => ({
   ordersMain: {
     padding: theme.spacing(8, 0, 0)
   },
-  greetingContainer: {
+  contentContainer: {
     padding: theme.spacing(6, 0, 0)    
   }
 }))
@@ -40,13 +40,13 @@ export default function Main() {
         <Tab label="Orders" />
         <Tab label="New Order" />
       </Tabs>
-      <Box component="div" hidden={tabIdx !== 0} className={classes.greetingContainer}>
+      <Box component="div" hidden={ tabIdx !== 0}  className={ classes.contentContainer }>
         <Greeting role="tabpanel" />
       </Box>
-      <Box component="div" hidden={tabIdx !== 1}>
+      <Box component="div" hidden={ tabIdx !== 1 } className={ classes.contentContainer }>
         <Orders />
       </Box>
-      <Box component="div" hidden={tabIdx !== 2}>
+      <Box component="div" hidden={ tabIdx !== 2 } className={ classes.contentContainer }>
         <OrderForm />
       </Box>
     </Container>

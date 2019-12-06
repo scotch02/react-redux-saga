@@ -9,7 +9,7 @@ import { createStore, applyMiddleware, compose } from "redux"
 import createSagaMiddleware from "redux-saga"
 import mySaga from "./engine/sagas"
 
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom"
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 
 import Header from "./common/Header/Header"
 import ExchangePage from "./exchange/components/Main/Main"

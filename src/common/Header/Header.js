@@ -54,7 +54,6 @@ export default function Header() {
           <Link
             variant="button"
             color="textPrimary"
-            //href="#"
             className={classes.link}
             component={LinkExcange}
           >
@@ -71,7 +70,6 @@ export default function Header() {
           <Link
             variant="button"
             color="textPrimary"
-            //href="#"
             className={classes.link}
             component={LinkOrders}
           >

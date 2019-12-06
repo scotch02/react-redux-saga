@@ -78,7 +78,7 @@ export default function Footer() {
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
-      {"Copyright © "}
+      {"Copyright © "}&copy;
       <Link color="inherit" href="https://material-ui.com/">
         Your Website
       </Link>{" "}

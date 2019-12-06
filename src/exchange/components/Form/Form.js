@@ -109,7 +109,7 @@ function Form(props) {
 }
 
 Form.propTypes = {
-  buttonOptionsArray: PropTypes.array,
+  buttonOptionsArray: PropTypes.arrayOf(PropTypes.object),
   result: PropTypes.number
 }
 
