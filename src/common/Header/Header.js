@@ -1,7 +1,12 @@
 import AppBar from "@material-ui/core/AppBar"
 import React from "react"
-import { Toolbar, Typography, Link, Button } from "@material-ui/core"
+import Toolbar from "@material-ui/core/Toolbar"
+import Typography from "@material-ui/core/Typography"
+import Link from "@material-ui/core/Link"
+import Button from "@material-ui/core/Button"
 import { makeStyles } from "@material-ui/styles"
+
+import { Link as RouterLink} from "react-router-dom"
 
 const useStyles = makeStyles(theme => ({
   appBar: {
@@ -17,6 +22,14 @@ const useStyles = makeStyles(theme => ({
     margin: theme.spacing(1, 1.5)
   }
 }))
+
+const LinkExcange = React.forwardRef((props, ref) => (
+  <RouterLink innerRef={ref} to="/exchange" {...props} />
+));
+
+const LinkOrders = React.forwardRef((props, ref) => (
+  <RouterLink innerRef={ref} to="/orders" {...props} />
+));
 
 export default function Header() {
   const classes = useStyles()
@@ -41,8 +54,9 @@ export default function Header() {
           <Link
             variant="button"
             color="textPrimary"
-            href="#"
+            //href="#"
             className={classes.link}
+            component={LinkExcange}
           >
             Exchange
           </Link>
@@ -57,8 +71,9 @@ export default function Header() {
           <Link
             variant="button"
             color="textPrimary"
-            href="#"
+            //href="#"
             className={classes.link}
+            component={LinkOrders}
           >
             Orders
           </Link>

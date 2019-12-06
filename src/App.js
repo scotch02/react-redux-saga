@@ -8,6 +8,9 @@ import { Provider } from "react-redux"
 import { createStore, applyMiddleware, compose } from "redux"
 import createSagaMiddleware from "redux-saga"
 import mySaga from "./engine/sagas"
+
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom"
+
 import Header from "./common/Header/Header"
 import ExchangePage from "./exchange/components/Main/Main"
 import OrdersPage from "./orders/Pages/Main/Main"
@@ -57,10 +60,18 @@ function App() {
     <Provider store={store}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <Header />
-        {/* <ExchangePage /> */}
-        <OrdersPage />
-        <Footer />
+        <Router>
+          <Header />
+          <Switch>
+            <Route path="/orders">
+              <OrdersPage />
+            </Route>
+            <Route path={["/exchange", "/"]}>
+              <ExchangePage />
+            </Route>
+          </Switch>
+          <Footer />
+        </Router>
       </ThemeProvider>
     </Provider>
   )
