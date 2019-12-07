@@ -36,7 +36,8 @@ function Form(props) {
     result,
     currentBaseCurrency,
     currentCurrency,
-    value } = props
+    value
+  } = props
 
   const classes = useStyles()
 
@@ -109,7 +110,12 @@ function Form(props) {
 }
 
 Form.propTypes = {
-  buttonOptionsArray: PropTypes.arrayOf(PropTypes.object),
+  buttonOptionsArray: PropTypes.arrayOf(
+    PropTypes.shape({
+      caption: PropTypes.string,
+      selected: PropTypes.bool
+    })
+  ),
   result: PropTypes.number
 }
 
@@ -123,7 +129,13 @@ Form.defaultProps = {
 }
 
 const mapStateToProps = state => {
-  const { baseCurrencies, currentBaseCurrency, currentCurrency, value, result } = state
+  const {
+    baseCurrencies,
+    currentBaseCurrency,
+    currentCurrency,
+    value,
+    result
+  } = state
   return {
     buttonOptionsArray: baseCurrencies.map(title => ({
       caption: title,

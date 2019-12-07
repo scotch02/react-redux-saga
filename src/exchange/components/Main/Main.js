@@ -47,7 +47,15 @@ function Main(props) {
 }
 
 Main.propTypes = {
-  cards: PropTypes.arrayOf(PropTypes.object),
+  cards: PropTypes.arrayOf(
+    PropTypes.shape({
+      title: PropTypes.string,
+      usd: PropTypes.number,
+      uah: PropTypes.number,
+      rur: PropTypes.number,
+      selected: PropTypes.bool
+    })
+  ),
   isEmpty: PropTypes.bool,
   loadCurrencyPairs: PropTypes.func
 }
