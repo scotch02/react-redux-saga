@@ -1,4 +1,4 @@
-export const getCurrentBaseCurrency = state => state.currentBaseCurrency
-export const getCurrentCurrency = state => state.currentCurrency
-export const getCurrencyPairs = state => state.currencyPairs
+export const getCurrency = state => state.currency
+export const getCoin = state => state.coin
+export const getPairs = state => state.pairs
 export const getValue = state => state.value

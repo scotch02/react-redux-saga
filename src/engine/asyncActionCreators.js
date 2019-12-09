@@ -1,8 +1,8 @@
 import { asyncTypes } from "./asyncActionTypes"
 
-export function loadCurrencyPairsAsyncActionCreator() {
+export function loadPairsAsyncActionCreator() {
   return {
-    type: asyncTypes.LOAD_CURRENCY_PAIRS_ASYNC
+    type: asyncTypes.LOAD_PAIRS_ASYNC
   }
 }
 
@@ -13,16 +13,16 @@ export function setResultAsyncActionCreator(value) {
   }
 }
 
-export function setCurrentCurrencyAsyncActionCreator(value) {
+export function setCoinAsyncActionCreator(value) {
   return {
-    type: asyncTypes.SET_CURRENT_CURRENCY_ASYNC,
+    type: asyncTypes.SET_COIN_ASYNC,
     payload: value
   }
 }
 
-export function setCurrentBaseCurrencyAsyncActionCreator(value) {
+export function setCurrencyAsyncActionCreator(value) {
   return {
-    type: asyncTypes.SET_CURRENT_BASE_CURRENCY_ASYNC,
+    type: asyncTypes.SET_CURRENCY_ASYNC,
     payload: value
   }
 }

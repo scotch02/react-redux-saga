@@ -10,9 +10,11 @@ import { connect } from "react-redux"
 
 import {
   setResultAsyncActionCreator,
-  setCurrentCurrencyAsyncActionCreator,
-  setCurrentBaseCurrencyAsyncActionCreator
+  setCoinAsyncActionCreator,
+  setCurrencyAsyncActionCreator
 } from "../../../engine/asyncActionCreators"
+
+import { currencies } from "../../constants"
 
 const useStyles = makeStyles(theme => ({
   buttons: {
@@ -32,10 +34,10 @@ function Form(props) {
   const {
     buttonOptionsArray,
     setResult,
-    setCurrentBaseCurrency,
+    setCurrency,
     result,
-    currentBaseCurrency,
-    currentCurrency,
+    currency,
+    coin,
     value
   } = props
 
@@ -45,8 +47,8 @@ function Form(props) {
     setResult(parseFloat(event.target.value))
   }
 
-  const handleChangeCurrentBaseCurrency = event => {
-    setCurrentBaseCurrency(event.currentTarget.value)
+  const handleChangeCurrency = event => {
+    setCurrency(event.currentTarget.value)
   }
 
   const error = true
@@ -85,7 +87,7 @@ function Form(props) {
                 variant={buttonOptions.selected ? "contained" : "outlined"}
                 color="primary"
                 className={classes.button}
-                onClick={handleChangeCurrentBaseCurrency}
+                onClick={handleChangeCurrency}
               >
                 {buttonOptions.caption}
               </Button>
@@ -102,7 +104,7 @@ function Form(props) {
           gutterBottom
           className={classes.result}
         >
-          {value} {currentCurrency} will be {result} in {currentBaseCurrency}
+          {value} {coin} will be {result} in {currency}
         </Typography>
       </Grid>
     </>
@@ -130,20 +132,19 @@ Form.defaultProps = {
 
 const mapStateToProps = state => {
   const {
-    baseCurrencies,
-    currentBaseCurrency,
-    currentCurrency,
+    currency,
+    coin,
     value,
     result
   } = state
   return {
-    buttonOptionsArray: baseCurrencies.map(title => ({
+    buttonOptionsArray: currencies.map(title => ({
       caption: title,
-      selected: title === currentBaseCurrency
+      selected: title === currency
     })),
     result,
-    currentBaseCurrency,
-    currentCurrency,
+    currency,
+    coin,
     value
   }
 }
@@ -153,11 +154,11 @@ const mapDispatchToProps = dispatch => {
     setResult: value => {
       dispatch(setResultAsyncActionCreator(value))
     },
-    setCurrentCurrency: value => {
-      dispatch(setCurrentCurrencyAsyncActionCreator(value))
+    setCoin: value => {
+      dispatch(setCoinAsyncActionCreator(value))
     },
-    setCurrentBaseCurrency: value => {
-      dispatch(setCurrentBaseCurrencyAsyncActionCreator(value))
+    setCurrency: value => {
+      dispatch(setCurrencyAsyncActionCreator(value))
     }
   }
 }

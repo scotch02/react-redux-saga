@@ -16,7 +16,7 @@ import PropTypes from "prop-types"
 import { connect } from "react-redux"
 
 import {
-  setCurrentCurrencyAsyncActionCreator
+  setCoinAsyncActionCreator
 } from "../../../engine/asyncActionCreators"
 
 const useStyles = makeStyles(theme => ({
@@ -41,12 +41,12 @@ function ExchangeCard(props) {
   Dan Abramov:
     Because defaultProps on functions will eventually get deprecated.
  */
-  const { title = "XXX", usd = 0, uah = 0, rur = 0, selected = false, setCurrentCurrency } = props
+  const { title = "XXX", usd = 0, uah = 0, rur = 0, selected = false, setCoin } = props
 
   const classes = useStyles()
 
-   const handleChangeCurrentCurrency = event => {
-    setCurrentCurrency(event.currentTarget.value)  
+   const handleChangeCoin = event => {
+    setCoin(event.currentTarget.value)  
    }
 
   return (
@@ -108,7 +108,7 @@ function ExchangeCard(props) {
             variant={selected ? "contained" : "outlined"}
             color="primary"
             value={title}
-            onClick = {handleChangeCurrentCurrency}
+            onClick = {handleChangeCoin}
           >
             Select
           </Button>
@@ -128,8 +128,8 @@ ExchangeCard.propTypes = {
 
 const mapDispatchToProps = dispatch => {
   return {
-    setCurrentCurrency: value => {
-      dispatch(setCurrentCurrencyAsyncActionCreator(value))
+    setCoin: value => {
+      dispatch(setCoinAsyncActionCreator(value))
     }
   }
 }

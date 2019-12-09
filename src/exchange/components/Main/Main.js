@@ -6,7 +6,8 @@ import makeStyles from "@material-ui/styles/makeStyles"
 import PropTypes from "prop-types"
 import Card from "../ExchangeCard/ExchangeCard"
 import Form from "../Form/Form"
-import { loadCurrencyPairsAsyncActionCreator } from "../../../engine/asyncActionCreators"
+import { loadPairsAsyncActionCreator } from "../../../engine/asyncActionCreators"
+import { dijitalCoins as coins } from "../../constants"
 
 const useStyles = makeStyles(theme => ({
   currencies: {
@@ -20,14 +21,14 @@ const useStyles = makeStyles(theme => ({
 function Main(props) {
   const classes = useStyles()
 
-  const { cards, isEmpty, loadCurrencyPairs } = props
+  const { cards, isEmpty, loadPairs } = props
   // https://www.robinwieruch.de/react-hooks-fetch-data
 
   useEffect(() => {
     if (isEmpty) {
-      loadCurrencyPairs()
+      loadPairs()
     }
-  }, [isEmpty, loadCurrencyPairs])
+  }, [isEmpty, loadPairs])
 
   return (
     <>
@@ -57,7 +58,7 @@ Main.propTypes = {
     })
   ),
   isEmpty: PropTypes.bool,
-  loadCurrencyPairs: PropTypes.func
+  loadPairs: PropTypes.func
 }
 
 Main.defaultProps = {
@@ -85,41 +86,41 @@ Main.defaultProps = {
     }
   ],
   isEmpty: false,
-  loadCurrencyPairs: () => {}
+  loadPairs: () => {}
 }
 
-const buildCardStructure = (currencyPairs, currentCurrency, title) => {
-  return currencyPairs
-    .filter(({ currency }) => currency === title)
+const buildCardStructure = (pairs, coin, title) => {
+  return pairs
+    .filter(({ coin }) => coin === title)
     .reduce(
-      (currency, pair) => {
-        const { baseCurrency, sale } = pair
+      (card, pair) => {
+        const { currency, sale } = pair
         return {
-          ...currency,
-          [baseCurrency.toLowerCase()]: sale
+          ...card,
+          [currency.toLowerCase()]: sale
         }
       },
       {
         title,
-        selected: currentCurrency === title
+        selected: coin === title
       }
     )
 }
 
 const mapStateToProps = state => {
-  const { currencyPairs, currentCurrency, currencies } = state
+  const { pairs, coin } = state
   return {
-    cards: currencies.map(title =>
-      buildCardStructure(currencyPairs, currentCurrency, title)
+    cards: coins.map(title =>
+      buildCardStructure(pairs, coin, title)
     ),
-    isEmpty: currencyPairs.length === 0
+    isEmpty: pairs.length === 0
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    loadCurrencyPairs: () => {
-      dispatch(loadCurrencyPairsAsyncActionCreator())
+    loadPairs: () => {
+      dispatch(loadPairsAsyncActionCreator())
     }
   }
 }

@@ -69,18 +69,18 @@ curl --include --header "Content-Type: application/json;charset=utf-8"  --reques
 
     const pairs = [
       {
-        currency: "BTC",
-        baseCurrency: "USD",
+        coin: "BTC",
+        currency: "USD",
         sale: btc
       },
       {
-        currency: "BTC",
-        baseCurrency: "UAH",
+        coin: "BTC",
+        currency: "UAH",
         sale: btc * usd
       },
       {
-        currency: "BTC",
-        baseCurrency: "RUR",
+        coin: "BTC",
+        currency: "RUR",
         sale: (btc * usd) / rur
       }
     ]
@@ -93,35 +93,35 @@ curl --include --header "Content-Type: application/json;charset=utf-8"  --reques
       ...pairs,
       ...[
         {
-          currency: "ETH",
-          baseCurrency: "USD",
+          coin: "ETH",
+          currency: "USD",
           sale: 153.86
         },
         {
-          currency: "ETH",
-          baseCurrency: "UAH",
+          coin: "ETH",
+          currency: "UAH",
           sale: 3696.39
         },
         {
-          currency: "ETH",
-          baseCurrency: "RUR",
+          coin: "ETH",
+          currency: "RUR",
           sale: 9842.52
         }
       ],
       ...[
         {
-          currency: "XRP",
-          baseCurrency: "USD",
+          coin: "XRP",
+          currency: "USD",
           sale: 0.22609
         },
         {
-          currency: "XRP",
-          baseCurrency: "UAH",
+          coin: "XRP",
+          currency: "UAH",
           sale: 5.47
         },
         {
-          currency: "XRP",
-          baseCurrency: "RUR",
+          coin: "XRP",
+          currency: "RUR",
           sale: 15.151
         }
       ]

@@ -1,22 +1,22 @@
 import { types } from "./actionTypes"
 
-export function loadCurrencyPairsActionCreator(currencyPairs) {
+export function loadPairsActionCreator(pairs) {
   return {
-    type: types.LOAD_CURRENCY_PAIRS,
-    payload: currencyPairs
+    type: types.LOAD_PAIRS,
+    payload: pairs
   }
 }
 
-export function setCurrentCurrencyActionCreator(currency) {
+export function setCoinActionCreator(currency) {
   return {
-    type: types.SET_CURRENT_CURRENCY,
+    type: types.SET_COIN,
     payload: currency
   }
 }
 
-export function setCurrentBaseCurrencyActionCreator(currency) {
+export function setCurrencyActionCreator(currency) {
   return {
-    type: types.SET_CURRENT_BASE_CURRENCY,
+    type: types.SET_CURRENCY,
     payload: currency
   }
 }

@@ -2,43 +2,41 @@ import { types } from "./actionTypes"
 
 /*
 const state = {
-    currencyPairs: Array of Object ref
-    currentCurrency: String
-    currentBaseCurrency: String
-    currencies: Array of String
-    baseCurrencies: Array of String 
+    pairs: Array of Object ref
+    coin: String
+    currency: String
     value: Number
     result: Number
 } 
 */
 
+const pairsActionMapper = Object.create(null)
+pairsActionMapper[types.LOAD_PAIRS] = (state, { payload }) => {
+  return payload
+}
+
+const pairsReducer = (state = [], action) => {
+  const handler = pairsActionMapper[action.type]
+  return handler ? handler(state, action) : state
+}
+
+const coinActionMapper = Object.create(null)
+coinActionMapper[types.SET_COIN] = (state, { payload }) => {
+  return payload
+}
+
+const coinReducer = (state = "BTC", action) => {
+  const handler = coinActionMapper[action.type]
+  return handler ? handler(state, action) : state
+}
+
 const currencyActionMapper = Object.create(null)
-currencyActionMapper[types.LOAD_CURRENCY_PAIRS] = (state, { payload }) => {
+currencyActionMapper[types.SET_CURRENCY] = ( state, { payload } ) => {
   return payload
 }
 
-const currencyPairsReducer = (state = [], action) => {
+const currencyReducer = (state = "UAH", action) => {
   const handler = currencyActionMapper[action.type]
-  return handler ? handler(state, action) : state
-}
-
-const currentCurrencyActionMapper = Object.create(null)
-currentCurrencyActionMapper[types.SET_CURRENT_CURRENCY] = (state, { payload }) => {
-  return payload
-}
-
-const currentCurrencyReducer = (state = "BTC", action) => {
-  const handler = currentCurrencyActionMapper[action.type]
-  return handler ? handler(state, action) : state
-}
-
-const currentBaseCurrencyActionMapper = Object.create(null)
-currentBaseCurrencyActionMapper[types.SET_CURRENT_BASE_CURRENCY] = ( state, { payload } ) => {
-  return payload
-}
-
-const currentBaseCurrencyReducer = (state = "UAH", action) => {
-  const handler = currentBaseCurrencyActionMapper[action.type]
   return handler ? handler(state, action) : state
 }
 
@@ -62,31 +60,24 @@ const resultReducer = (state = 0, action) => {
   return handler ? handler(state, action) : state
 }
 
-const initialState = {
-  currencies: ["BTC", "ETH", "XRP"],
-  baseCurrencies: ["USD", "UAH", "RUR"]
-}
+const initialState = {}
 
 const combinedReducer = (state = initialState, action) => {
   const {
-    currencyPairs,
-    currentCurrency,
-    currentBaseCurrency,
-    currencies,
-    baseCurrencies,
+    pairs,
+    coin,
+    currency,
     value,
     result
   } = state
 
   return {
-    currencyPairs: currencyPairsReducer(currencyPairs, action),
-    currentCurrency: currentCurrencyReducer(currentCurrency, action),
-    currentBaseCurrency: currentBaseCurrencyReducer(
-      currentBaseCurrency,
+    pairs: pairsReducer(pairs, action),
+    coin: coinReducer(coin, action),
+    currency: currencyReducer(
+      currency,
       action
     ),
-    currencies,
-    baseCurrencies,
     value: valueReducer(value, action),
     result: resultReducer(result, action)
   }
@@ -96,9 +87,9 @@ const combinedReducer = (state = initialState, action) => {
 or 
 
 const combinedReducer = combineReducers({
-  currencyPairs: currencyPairsReducer,
-  currentCurrency: currentCurrencyReducer,
-  currentBaseCurrency: currentBaseCurrencyReducer,
+  pairs: pairsReducer,
+  coin: coinReducer,
+  currency: currencyReducer,
   result: resultReducer
 });
 */
