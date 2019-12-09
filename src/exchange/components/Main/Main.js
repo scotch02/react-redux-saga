@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useCallback } from "react"
 import { connect } from "react-redux"
 import Container from "@material-ui/core/Container"
 import Grid from "@material-ui/core/Grid"
@@ -21,14 +21,14 @@ const useStyles = makeStyles(theme => ({
 function Main(props) {
   const classes = useStyles()
 
-  const { cards, isEmpty, loadPairs } = props
+  const { cards, loadPairs } = props
   // https://www.robinwieruch.de/react-hooks-fetch-data
 
+  const initLoadPairs = useCallback(loadPairs, [loadPairs]);
+
   useEffect(() => {
-    if (isEmpty) {
-      loadPairs()
-    }
-  }, [isEmpty, loadPairs])
+    initLoadPairs()
+  }, [initLoadPairs])
 
   return (
     <>
@@ -112,8 +112,7 @@ const mapStateToProps = state => {
   return {
     cards: coins.map(title =>
       buildCardStructure(pairs, coin, title)
-    ),
-    isEmpty: pairs.length === 0
+    )
   }
 }
 
