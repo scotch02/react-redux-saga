@@ -52,17 +52,20 @@ curl --include --header "Content-Type: application/json;charset=utf-8"  --reques
       })
     }
 
-    return response.json()
+    const jsonStr = await response.text()
+
+    return JSON.parse(jsonStr, (key, value) => {
+      if (key === "sale") {
+        return parseFloat(value)
+      }
+      return value
+    })
   }
 
   static getUsefulData(privatDataArr) {
-    const btcItem = privatDataArr.find(({ ccy }) => ccy === "BTC")
-    const usdItem = privatDataArr.find(({ ccy }) => ccy === "USD")
-    const rurItem = privatDataArr.find(({ ccy }) => ccy === "RUR")
-
-    const btc = parseFloat(btcItem.sale)
-    const usd = parseFloat(usdItem.sale)
-    const rur = parseFloat(rurItem.sale)
+    const { sale: btc } = privatDataArr.find(({ ccy }) => ccy === "BTC")
+    const { sale: usd } = privatDataArr.find(({ ccy }) => ccy === "USD")
+    const { sale: rur } = privatDataArr.find(({ ccy }) => ccy === "RUR")
 
     const pairs = [
       {
