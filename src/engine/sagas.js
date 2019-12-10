@@ -26,57 +26,57 @@ function* getExchange() {
   }
 }
 
+function calculateResult({ pairs = [], coin = "BTC", currency = "USD", value = 0 }) {
+  const pair = pairs.find(
+    ({ coin: _coin, currency: _currency }) =>
+      _coin === coin && _currency === currency
+  )
+  
+  return pair ? value * pair.sale : 0
+} 
+
 function* setValue({ payload: value }) {
   yield put(setValueActionCreator(value))
 
-  const _currency = yield select(getCurrency)
-  const _coin = yield select(getCoin)
+  const currency = yield select(getCurrency)
+  const coin = yield select(getCoin)
   const pairs = yield select(getPairs)
+
   if (pairs.length > 0) {
-    const pair = pairs.find(
-      ({ coin, currency }) =>
-        _coin === coin && _currency === currency
-    )
-    const result = value * pair.sale
+    const result = calculateResult({ pairs, coin, currency, value })
     yield put(setResultActionCreator(result))
   }
 }
 
-function* setCoin({ payload: _coin }) {
-  yield put(setCoinActionCreator(_coin))
+function* setCoin({ payload: coin }) {
+  yield put(setCoinActionCreator(coin))
 
   const value = yield select(getValue)
-  const _currency = yield select(getCurrency)
+  const currency = yield select(getCurrency)
   const pairs = yield select(getPairs)
+
   if (pairs.length > 0) {
-    const pair = pairs.find(
-      ({ coin, currency }) =>
-        _coin === coin && _currency === currency
-    )
-    const result = value * pair.sale
+    const result = calculateResult({ pairs, coin, currency, value })
     yield put(setResultActionCreator(result))
   }
 }
 
-function* setCurrency({ payload: _currency }) {
-  yield put(setCurrencyActionCreator(_currency))
+function* setCurrency({ payload: currency }) {
+  yield put(setCurrencyActionCreator(currency))
 
   const value = yield select(getValue)
-  const _coin = yield select(getCoin)
+  const coin = yield select(getCoin)
   const pairs = yield select(getPairs)
+
   if (pairs.length > 0) {
-    const pair = pairs.find(
-      ({ coin, currency }) =>
-        _coin === coin && _currency === currency
-    )
-    const result = value * pair.sale
+    const result = calculateResult({ pairs, coin, currency, value })
     yield put(setResultActionCreator(result))
   }
 }
 
 function* rootSaga() {
   yield takeEvery(asyncTypes.LOAD_PAIRS_ASYNC, getExchange)
-  yield takeEvery(asyncTypes.SET_RESULT_ASYNC, setValue)
+  yield takeEvery(asyncTypes.SET_VALUE_ASYNC, setValue)
   yield takeEvery(asyncTypes.SET_COIN_ASYNC, setCoin)
   yield takeEvery(asyncTypes.SET_CURRENCY_ASYNC, setCurrency)
 }

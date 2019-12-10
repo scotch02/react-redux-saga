@@ -8,7 +8,7 @@ export function loadPairsAsyncActionCreator() {
 
 export function setResultAsyncActionCreator(value) {
   return {
-    type: asyncTypes.SET_RESULT_ASYNC,
+    type: asyncTypes.SET_VALUE_ASYNC,
     payload: value
   }
 }
