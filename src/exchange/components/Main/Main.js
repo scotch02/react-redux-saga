@@ -9,6 +9,8 @@ import Form from "../Form/Form"
 import { loadPairsAsyncActionCreator } from "../../../engine/asyncActionCreators"
 import { dijitalCoins as coins } from "../../constants"
 
+import withImmutablePropsToJS from "with-immutable-props-to-js"
+
 const useStyles = makeStyles(theme => ({
   currencies: {
     padding: theme.spacing(8, 0, 0)
@@ -24,7 +26,7 @@ function Main(props) {
   const { cards, loadPairs } = props
   // https://www.robinwieruch.de/react-hooks-fetch-data
 
-  const initLoadPairs = useCallback(loadPairs, [loadPairs]);
+  const initLoadPairs = useCallback(loadPairs, [loadPairs])
 
   useEffect(() => {
     initLoadPairs()
@@ -65,29 +67,48 @@ Main.defaultProps = {
   cards: [
     {
       title: "BTC",
-      usd: 6800,
-      uah: 150000,
-      rur: 340000,
+      usd: 1,
+      uah: 1,
+      rur: 1,
       selected: false
     },
     {
       title: "ETH",
-      usd: 250,
-      uah: 7400,
-      rur: 160000,
+      usd: 1,
+      uah: 1,
+      rur: 1,
       selected: false
     },
     {
       title: "XRP",
-      usd: 0.25,
-      uah: 7.0231,
-      rur: 17.228,
+      usd: 1,
+      uah: 1,
+      rur: 1,
       selected: false
     }
   ],
-  isEmpty: false,
   loadPairs: () => {}
 }
+
+/*
+const buildCardStructure = (pairs, coin, title) => {
+  return pairs
+    .filter(({ coin }) => coin === title)
+    .reduce(
+      (card, pair) => {
+        const { currency, sale } = pair
+        return {
+          ...card,
+          [currency.toLowerCase()]: sale
+        }
+      },
+      {
+        title,
+        selected: coin === title
+      }
+    )
+}
+*/
 
 const buildCardStructure = (pairs, coin, title) => {
   return pairs
@@ -107,12 +128,25 @@ const buildCardStructure = (pairs, coin, title) => {
     )
 }
 
+/*
 const mapStateToProps = state => {
   const { pairs, coin } = state
   return {
     cards: coins.map(title =>
       buildCardStructure(pairs, coin, title)
     )
+  }
+}
+*/
+
+const mapStateToProps = state => {
+  const pairs = state.getIn(["exchange", "pairs"])
+  const coin = state.getIn(["exchange", "coin"])
+
+  const cards = coins.map(title => buildCardStructure(pairs, coin, title))
+
+  return {
+    cards
   }
 }
 
@@ -124,4 +158,7 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Main)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withImmutablePropsToJS(Main))

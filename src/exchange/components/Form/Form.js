@@ -15,6 +15,14 @@ import {
 } from "../../../engine/asyncActionCreators"
 
 import { currencies } from "../../constants"
+import {
+  getCurrency,
+  getCoin,
+  getValue,
+  getResult
+} from "../../../engine/selectors"
+
+import withImmutablePropsToJS from "with-immutable-props-to-js"
 
 const useStyles = makeStyles(theme => ({
   buttons: {
@@ -127,16 +135,16 @@ Form.defaultProps = {
     { caption: "USD", selected: true },
     { caption: "RUR" }
   ],
-  result: 0
+  result: 0,
+  value: 0
 }
 
 const mapStateToProps = state => {
-  const {
-    currency,
-    coin,
-    value,
-    result
-  } = state
+  const currency = getCurrency(state)
+  const coin = getCoin(state)
+  const value = getValue(state)
+  const result = getResult(state)
+
   return {
     buttonOptionsArray: currencies.map(title => ({
       caption: title,
@@ -163,4 +171,7 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Form)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withImmutablePropsToJS(Form))

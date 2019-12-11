@@ -10802,6 +10802,13 @@ wide-align@^1.1.0:
   dependencies:
     string-width "^1.0.2 || 2"
 
+with-immutable-props-to-js@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/with-immutable-props-to-js/-/with-immutable-props-to-js-2.0.1.tgz#eba26f24bcff76d81cd65d6d31af1dc06d105ddf"
+  integrity sha512-Q/XCCxd4Fcv9L2yN47IGR7ftvw5psYWmm+WHJ/QLYn+HFPUgHHzT0PjUK9P9n9fbybb9FTyVA1DDfoKr3URubg==
+  dependencies:
+    hoist-non-react-statics "^3.3.0"
+
 word-wrap@~1.2.3:
   version "1.2.3"
   resolved "https://registry.yarnpkg.com/word-wrap/-/word-wrap-1.2.3.tgz#610636f6b1f703891bd34771ccb17fb93b47079c"

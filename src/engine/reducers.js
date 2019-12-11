@@ -1,97 +1,77 @@
 import { types } from "./actionTypes"
-
+import Immutable, { Map } from "immutable"
 /*
-const state = {
-    pairs: Array of Object ref
-    coin: String
-    currency: String
-    value: Number
-    result: Number
-} 
+import {
+  combineReducers
+} from 'redux-immutable';
 */
 
-const pairsActionMapper = Object.create(null)
-pairsActionMapper[types.LOAD_PAIRS] = (state, { payload }) => {
-  return payload
+const initialExchangeState = Map({
+  pairs: [],
+  coin: "BTC",
+  currency: "UAH",
+  value: 0,
+  result: 0
+})
+
+const setter = (state, key, { payload }) => {
+  state.set(key, payload)
 }
 
-const pairsReducer = (state = [], action) => {
+const pairsActionMapper = Object.create(null)
+pairsActionMapper[types.LOAD_PAIRS] = setter
+
+const pairsReducer = (state, action) => {
   const handler = pairsActionMapper[action.type]
-  return handler ? handler(state, action) : state
+  handler && handler(state, "pairs", action)
 }
 
 const coinActionMapper = Object.create(null)
-coinActionMapper[types.SET_COIN] = (state, { payload }) => {
-  return payload
-}
+coinActionMapper[types.SET_COIN] = setter
 
-const coinReducer = (state = "BTC", action) => {
+const coinReducer = (state, action) => {
   const handler = coinActionMapper[action.type]
-  return handler ? handler(state, action) : state
+  handler && handler(state, "coin", action)
 }
 
 const currencyActionMapper = Object.create(null)
-currencyActionMapper[types.SET_CURRENCY] = ( state, { payload } ) => {
-  return payload
-}
+currencyActionMapper[types.SET_CURRENCY] = setter
 
-const currencyReducer = (state = "UAH", action) => {
+const currencyReducer = (state, action) => {
   const handler = currencyActionMapper[action.type]
-  return handler ? handler(state, action) : state
+  handler && handler(state, "currency", action)
 }
 
 const valueActionMapper = Object.create(null)
-valueActionMapper[types.SET_VALUE] = (state, { payload }) => {
-  return payload
-}
+valueActionMapper[types.SET_VALUE] = setter
 
-const valueReducer = (state = 0, action) => {
+const valueReducer = (state, action) => {
   const handler = valueActionMapper[action.type]
-  return handler ? handler(state, action) : state
+  handler && handler(state, "value", action)
 }
 
 const resultActionMapper = Object.create(null)
-resultActionMapper[types.SET_RESULT] = (state, { payload }) => {
-  return payload
-}
+resultActionMapper[types.SET_RESULT] = setter
 
-const resultReducer = (state = 0, action) => {
+const resultReducer = (state, action) => {
   const handler = resultActionMapper[action.type]
-  return handler ? handler(state, action) : state
+  handler && handler(state, "result", action)
 }
 
-const initialState = {}
-
-const combinedReducer = (state = initialState, action) => {
-  const {
-    pairs,
-    coin,
-    currency,
-    value,
-    result
-  } = state
-
-  return {
-    pairs: pairsReducer(pairs, action),
-    coin: coinReducer(coin, action),
-    currency: currencyReducer(
-      currency,
-      action
-    ),
-    value: valueReducer(value, action),
-    result: resultReducer(result, action)
-  }
+const exchangeReducer = (state = initialExchangeState, action) => {
+  return state.withMutations(_state => {
+    pairsReducer(_state, action)
+    coinReducer(_state, action)
+    currencyReducer(_state, action)
+    valueReducer(_state, action)
+    resultReducer(_state, action)
+  })
 }
 
-/*
-or 
+const rootReducer = (state = Map({}), action) => {
+  return state.withMutations(_state => {
+    _state.set("exchange", exchangeReducer(_state.get("exchange"), action))
+  })
+}
 
-const combinedReducer = combineReducers({
-  pairs: pairsReducer,
-  coin: coinReducer,
-  currency: currencyReducer,
-  result: resultReducer
-});
-*/
-
-export default combinedReducer
+export default rootReducer

@@ -16,14 +16,14 @@ import ExchangePage from "./exchange/components/Main/Main"
 import OrdersPage from "./orders/Pages/Main/Main"
 import Footer from "./common/Footer/Footer"
 
-import combinedReducer from "./engine/reducers"
+import rootReducer from "./engine/reducers"
 
 const sagaMiddleware = createSagaMiddleware()
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
 const store = createStore(
-  combinedReducer,
+  rootReducer,
   composeEnhancers(applyMiddleware(sagaMiddleware))
 )
 

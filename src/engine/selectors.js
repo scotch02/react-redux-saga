@@ -1,4 +1,5 @@
-export const getCurrency = state => state.currency
-export const getCoin = state => state.coin
-export const getPairs = state => state.pairs
-export const getValue = state => state.value
+export const getCurrency = state => state.getIn(["exchange", "currency"])
+export const getCoin = state => state.getIn(["exchange", "coin"])
+export const getPairs = state => state.getIn(["exchange", "pairs"])
+export const getValue = state => state.getIn(["exchange", "value"])
+export const getResult = state => state.getIn(["exchange", "result"])
