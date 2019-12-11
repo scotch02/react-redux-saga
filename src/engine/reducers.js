@@ -1,5 +1,5 @@
 import { types } from "./actionTypes"
-import Immutable, { Map } from "immutable"
+import { Map, fromJS } from "immutable"
 /*
 import {
   combineReducers
@@ -15,7 +15,7 @@ const initialExchangeState = Map({
 })
 
 const setter = (state, key, { payload }) => {
-  state.set(key, payload)
+  state.set(key, fromJS(payload))
 }
 
 const pairsActionMapper = Object.create(null)

@@ -90,13 +90,13 @@ Main.defaultProps = {
   loadPairs: () => {}
 }
 
-/*
 const buildCardStructure = (pairs, coin, title) => {
   return pairs
-    .filter(({ coin }) => coin === title)
+    .filter( pair => pair.get("coin") === title)
     .reduce(
       (card, pair) => {
-        const { currency, sale } = pair
+        const currency = pair.get("currency")
+        const sale = pair.get("sale")
         return {
           ...card,
           [currency.toLowerCase()]: sale
@@ -108,36 +108,6 @@ const buildCardStructure = (pairs, coin, title) => {
       }
     )
 }
-*/
-
-const buildCardStructure = (pairs, coin, title) => {
-  return pairs
-    .filter(({ coin }) => coin === title)
-    .reduce(
-      (card, pair) => {
-        const { currency, sale } = pair
-        return {
-          ...card,
-          [currency.toLowerCase()]: sale
-        }
-      },
-      {
-        title,
-        selected: coin === title
-      }
-    )
-}
-
-/*
-const mapStateToProps = state => {
-  const { pairs, coin } = state
-  return {
-    cards: coins.map(title =>
-      buildCardStructure(pairs, coin, title)
-    )
-  }
-}
-*/
 
 const mapStateToProps = state => {
   const pairs = state.getIn(["exchange", "pairs"])

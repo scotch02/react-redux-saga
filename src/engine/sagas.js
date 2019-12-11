@@ -8,12 +8,8 @@ import {
   setValueActionCreator
 } from "./actionCreators"
 import { asyncTypes } from "./asyncActionTypes"
-import {
-  getCurrency,
-  getCoin,
-  getPairs,
-  getValue
-} from "./selectors"
+import { getCurrency, getCoin, getPairs, getValue } from "./selectors"
+import { List } from "immutable"
 
 function* getExchange() {
   try {
@@ -26,14 +22,20 @@ function* getExchange() {
   }
 }
 
-function calculateResult({ pairs = [], coin = "BTC", currency = "USD", value = 0 }) {
-  const pair = pairs.find(
-    ({ coin: _coin, currency: _currency }) =>
-      _coin === coin && _currency === currency
-  )
-  
-  return pair ? value * pair.sale : 0
-} 
+function calculateResult({
+  pairs = List([]),
+  coin = "BTC",
+  currency = "USD",
+  value = 0
+}) {
+  const pair = pairs.find(_pair => {
+    const _coin = _pair.get("coin")
+    const _currency = _pair.get("currency")
+    return _coin === coin && _currency === currency
+  })
+
+  return pair ? value * pair.get("sale") : 0
+}
 
 function* setValue({ payload: value }) {
   yield put(setValueActionCreator(value))
@@ -42,7 +44,7 @@ function* setValue({ payload: value }) {
   const coin = yield select(getCoin)
   const pairs = yield select(getPairs)
 
-  if (pairs.length > 0) {
+  if (pairs.size > 0) {
     const result = calculateResult({ pairs, coin, currency, value })
     yield put(setResultActionCreator(result))
   }
@@ -55,7 +57,7 @@ function* setCoin({ payload: coin }) {
   const currency = yield select(getCurrency)
   const pairs = yield select(getPairs)
 
-  if (pairs.length > 0) {
+  if (pairs.size > 0) {
     const result = calculateResult({ pairs, coin, currency, value })
     yield put(setResultActionCreator(result))
   }
@@ -68,7 +70,7 @@ function* setCurrency({ payload: currency }) {
   const coin = yield select(getCoin)
   const pairs = yield select(getPairs)
 
-  if (pairs.length > 0) {
+  if (pairs.size > 0) {
     const result = calculateResult({ pairs, coin, currency, value })
     yield put(setResultActionCreator(result))
   }
