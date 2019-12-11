@@ -6,7 +6,7 @@ import {
 } from 'redux-immutable';
 */
 
-const initialExchangeState = Map({
+const initialExchangeState = fromJS({
   pairs: [],
   coin: "BTC",
   currency: "UAH",
@@ -58,7 +58,7 @@ const resultReducer = (state, action) => {
   handler && handler(state, "result", action)
 }
 
-const exchangeReducer = (state = initialExchangeState, action) => {
+const exchangeReducer = (state, action) => {
   return state.withMutations(_state => {
     pairsReducer(_state, action)
     coinReducer(_state, action)
@@ -68,7 +68,11 @@ const exchangeReducer = (state = initialExchangeState, action) => {
   })
 }
 
-const rootReducer = (state = Map({}), action) => {
+const initialState = fromJS({
+  exchange: initialExchangeState 
+})
+
+const rootReducer = (state = initialState, action) => {
   return state.withMutations(_state => {
     _state.set("exchange", exchangeReducer(_state.get("exchange"), action))
   })

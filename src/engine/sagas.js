@@ -44,7 +44,7 @@ function* setValue({ payload: value }) {
   const coin = yield select(getCoin)
   const pairs = yield select(getPairs)
 
-  if (pairs.size > 0) {
+  if (!pairs.isEmpty()) {
     const result = calculateResult({ pairs, coin, currency, value })
     yield put(setResultActionCreator(result))
   }
@@ -57,7 +57,7 @@ function* setCoin({ payload: coin }) {
   const currency = yield select(getCurrency)
   const pairs = yield select(getPairs)
 
-  if (pairs.size > 0) {
+  if (!pairs.isEmpty()) {
     const result = calculateResult({ pairs, coin, currency, value })
     yield put(setResultActionCreator(result))
   }
@@ -70,7 +70,7 @@ function* setCurrency({ payload: currency }) {
   const coin = yield select(getCoin)
   const pairs = yield select(getPairs)
 
-  if (pairs.size > 0) {
+  if (!pairs.isEmpty()) {
     const result = calculateResult({ pairs, coin, currency, value })
     yield put(setResultActionCreator(result))
   }
