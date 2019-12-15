@@ -2,7 +2,7 @@ import { asyncTypes } from "./asyncActionTypes"
 
 export function loadPairsAsyncActionCreator() {
   return {
-    type: asyncTypes.LOAD_PAIRS_ASYNC
+    type: asyncTypes.FETCH_PAIRS_REQUESTED
   }
 }
 
